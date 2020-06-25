@@ -7,108 +7,130 @@
 
 MODELBEGIN
 
-EQUATION("Auton")
-/*
-Gasto Aut�nomo
-*/
 
-v[0] = VL("Auton", 1);
-v[1] = V("c");		// cresc gasto auton
+EQUATION( "Z/Q" )
 
-v[2] = (1 + v[1])*v[0];
+	/*
+	Autonomous expenditures-Output ratio
+	*/
+	
+	v[0] = V("Auton");		//
+	v[1] = V("basic_total");	//
+	v[2] = V("Q_t");			//
+	
+	v[3] = (v[0] + v[1])/v[2];
+
+RESULT( v[3] )
+
+
+EQUATION( "Auton" )
+
+	/*
+	Gasto Autônomo
+	*/
+   
+	v[0] = VL("Auton", 1);
+	v[1] = V("c");		// cresc gasto auton
+   
+	v[2] = (1 + v[1])*v[0];
+   
+RESULT( v[2] )
+
+
+EQUATION( "basic" )
+
+	/*
+	"Renda básica universal" - ALTERADO
+	*/
+	
+	v[0] = V("minsal_t");	// minimum wage in t
+	v[1] = V("p_minsal");	// % sal min renda básica
+	v[3] = V("c_basic");	// basic income growth
+
+	v[2] = (1 + v[3])*v[0]*v[1];
+
+RESULT(v[2])
+
+
+EQUATION( "basic_total" )
+	
+	/*
+	Total expenditure with basic income
+	*/
+
+	v[0] = V("basic");
+	v[1] = V("N");
+	v[2] = v[0]*v[1];
+
+RESULT(v[2])
+
+
+EQUATION( "Q_fc" )
+	
+	/*
+	Full capacity output - ALTERADO
+	*/
+	
+	v[1] = V("K_t"); // Changed
+	v[2] = V("gamma"); // inverso da produtividade de K
+	v[3] = v[1]/v[2]; // Warning: supply constraint
+	v[4] = V("xi"); // produtividade de L
+	v[5] = V("N");
+	v[6] = v[4]*v[5]; // 'Warning: labor supply constraint'
+	
+	v[7] = min(v[3],v[6]);
+
+RESULT( v[7] )
+
+
+EQUATION( "u_t" )
+
+	/*
+	Capacity utilization equation
+	*/
+	
+	v[0] = V("Q_t"); // WARNING: Trial to solve deadlock erros
+	v[1] = V("Q_fc"); // WARNING: Trial to solve deadlock erros
+	v[2] = v[0]/(v[1]);
+	
+	//if (v[2] >= 1) // Warning: supply constraint
+	//{v[2] = 1;}
+	//else {v[2] = v[2];}
+	
+	//if (v[2] < 0) // Warning: supply constraint
+	//{v[2] = 0;}
+	//else {v[2] = v[2];}
+
 
 RESULT( v[2] )
 
 
-EQUATION("basic")
-/*
-"Renda básica universal" - ALTERADO
-*/
+EQUATION( "I_t" )
 
-v[0] = V("minsal_t");
-v[1] = V("p_minsal"); // % sal min renda básica
-v[3] = V("c_basic");
+	/*
+	Investimento super
+	*/
+	
+	v[0] = VL("Q_t",1);
+	v[1] = VL("h",1);
+	v[2] = v[0]*v[1];
 
-v[2] = (1 + v[3])*v[0]*v[1];
+RESULT( v[2] )
 
-RESULT(v[2])
+EQUATION( "h" )
+	
+	/*
+	Ajustamento
+	*/
+	
+	v[0] = VL("h",1);
+	v[1] = V("gamma_u");
+	v[2] = VL("u_t",1);
+	v[3] = V("ud");
+	
+	v[4] = v[0]*(1 + v[1]*(v[2] - v[3]));
 
-
-EQUATION("basic_total")
-/*
-Total expenditure with basic
-*/
-
-v[0] = V("basic");
-v[1] = V("N");
-v[2] = v[0]*v[1];
-
-RESULT(v[2])
-
-
-
-EQUATION("Q_fc")
-/*
-Full capacity output - ALTERADO
-*/
-
-v[1] = V("K_t"); // Changed
-v[2] = V("gamma"); // inverso da produtividade de K
-v[3] = v[1]/v[2]; // Warning: supply constraint
-v[4] = V("xi"); // produtividade de L
-v[5] = V("N");
-v[6] = v[4]*v[5]; // 'Warning: labor supply constraint'
-v[7] = min(v[3],v[6]);
-
-RESULT(v[3])
-
-
-EQUATION("u_t")
-/*
-Capacity utilization equation
-*/
-
-v[0] = V("Q_t"); // WARNING: Trial to solve deadlock erros
-v[1] = V("Q_fc"); // WARNING: Trial to solve deadlock erros
-v[2] = v[0]/(v[1]);
-
-//if (v[2] >= 1) // Warning: supply constraint
-//{v[2] = 1;}
-//else {v[2] = v[2];}
-
-//if (v[2] < 0) // Warning: supply constraint
-//{v[2] = 0;}
-//else {v[2] = v[2];}
-
-
-RESULT(v[2])
-
-
-EQUATION("I_t")
-/*
-Investimento super
-*/
-
-v[0] = VL("Q_t",1);
-v[1] = VL("h",1);
-v[2] = v[0]*v[1];
-
-RESULT(v[2])
-
-EQUATION("h")
-/*
-Ajustamento
-*/
-
-v[0] = VL("h",1);
-v[1] = V("gamma_u");
-v[2] = VL("u_t",1);
-v[3] = V("ud");
-
-v[4] = v[0]*(1 + v[1]*(v[2] - v[3]));
-
-RESULT(v[4])
-
+RESULT( v[4] )
 
 
 EQUATION( "K_t" )
@@ -758,5 +780,4 @@ void close_sim( void )
 {
 	// close simulation special commands go here
 }
-
 
