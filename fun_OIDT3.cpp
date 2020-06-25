@@ -8,7 +8,7 @@
 MODELBEGIN
 
 
-EQUATION( "Z/Q" )
+EQUATION( "Z_Q" )
 
 	/*
 	Autonomous expenditures-Output ratio
