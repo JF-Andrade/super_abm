@@ -251,10 +251,12 @@ EQUATION( "Yw_t" )
 	v[1] = V("i");				// Interest rate
 	v[2] = VL("D_t", 1);			// Workers' debt in t-1
 	v[3] = V("basic");			// Renda básica
+	v[4] = V("tax"); // Tax over total income (in %)
+	
+	v[5] = v[0] - v[1]*v[2] + v[3];
+	v[5] = (1-v[4])*v[5];
 
-	v[3] = v[0] - v[1]*v[2] + v[3];
-
-RESULT( v[3] )
+RESULT( v[5] )
 
 
 EQUATION( "Sw" )
@@ -400,7 +402,7 @@ EQUATION( "Cw_t" )
 	v[3] = V("wbarocc");			// Average wage of employed workers in t-1
 	v[4] = V("sigmapsi");			// Propensity to save out of workers' wealth
 	v[5] = VL("Ww_t", 1);			// Workers' wealth in t-1
-	v[7] = V("Yw_t");				// Income in t
+	v[7] = V("Yw_t");				// DISPOSABLE Income in t
 
 	v[6] = (1 - v[0])*v[7]  + (1 - v[4])*v[5] + v[2]*(v[3] - v[1]); //SIMPLIFICADO
 
@@ -674,16 +676,18 @@ RESULT( v[2] )
 EQUATION( "Yf_t" )
 
 	/*
-	Financial sector income. Eq. (33)
+	Financial sector income. Eq. (33). Updated: MUST BE 0
 	*/
 
 	v[0] = V("i");				// Interest rate
 	v[1] = VL("D_t", 1);			// Workers' debt in t-1
 	v[2] = VL("B_t", 1);			// Bonds in t-1
+	v[3] = VL("Gov_Debt",1);
+	v[4] = VL("M_TOTAL",1);
 
-	v[3] = v[0]*(v[1] + v[2]);
+	v[5] = v[0]*(v[1] + v[2] + v[3] - v[4]);
 
-RESULT( v[3] )
+RESULT( v[5] )
 
 
 EQUATION( "M_t" )
@@ -769,6 +773,66 @@ EQUATION( "Y_total" )
 	v[2] = v[0];
 
 RESULT( v[2] )
+
+
+
+EQUATION("Gov_Total")
+/*
+Government total expenditure (fully autonomous)
+
+Warning: DO NOT include Gov_Total in GDP calculation. 
+Reason: basic income already included in consumers disposable income
+*/
+
+v[0] = V("Auton");
+v[1] = V("basic_total");
+v[2] = v[0] + v[1];
+
+RESULT( v[2] )
+
+EQUATION("Tax_Total")
+/*
+Government total revenue collect at consumers disposable income
+*/
+
+v[0] = V("tax");
+
+v[1] = 0; // Counter
+
+CYCLE(cur, "Consumer")
+		{
+		v[2] = VS(cur, "Yw_t"); // Consumer Disposable income (Total - Tax)
+		v[2] = v[2]/(1-v[0]); // Consumer total income
+		v[2] = v[2]*v[0]; // Only tax
+		v[1] = v[1] + v[2];
+		}
+
+RESULT( v[1] )
+
+EQUATION("Gov_Balance")
+/*
+Government net Balance (+) if surplus, (-) otherwise
+*/
+
+v[0] = V("Gov_Total");
+v[1] = V("Tax_Total");
+v[2] = v[1] - v[0];
+
+RESULT( v[2] )
+
+
+EQUATION("Gov_Debt")
+/*
+Government debt
+*/
+
+v[0] = V("i"); // Interest rate
+v[1] = V("Gov_Balance");
+v[2] = VL("Gov_Debt",1);
+v[3] = (1+v[0])*v[2] - v[1];
+
+
+RESULT( v[3] )
 
 
 
