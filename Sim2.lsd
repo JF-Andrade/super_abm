@@ -154,7 +154,7 @@ Var: B_t 1 n + n n	0
 Var: I_t 1 s + n n	2
 Var: K_t 1 s + n n	10
 Var: Q_fc 1 s + n n	4
-Var: u_t 0 s + n n
+Var: u_t 1 s + n n	0.5
 Param: gamma_u 0 n + n n	0.1
 Var: h 1 s + n n	0.1
 
@@ -179,7 +179,7 @@ Object: Banks C	1
 
 SIM_NUM 1
 SEED 1
-MAX_STEP 1000
+MAX_STEP 500
 EQUATION fun_OIDT3.cpp
 MODELREPORT report_Sim2.html
 
@@ -498,8 +498,9 @@ END_DESCRIPTION
 
 Variable_u_t
 Capacity utilization equation
-_INIT_
 
+_INIT_
+All 1 instances equal to 0.5.
 END_DESCRIPTION
 
 Parameter_gamma_u
@@ -618,17 +619,14 @@ _INIT_
 END_DESCRIPTION
 
 Parameter_c_basic
-
 'c_basic' appears in the equation for: basic
-
 _INIT_
-
 
 END_DESCRIPTION
 
 Object_Banks
 Financial sector. Currently not used
-
+_INIT_
 
 END_DESCRIPTION
 
