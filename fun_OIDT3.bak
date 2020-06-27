@@ -47,7 +47,7 @@ EQUATION( "basic" )
 	v[1] = V("p_minsal");	// % sal min renda básica
 	v[3] = V("c_basic");	// basic income growth
 
-	v[2] = (1 + v[3])*v[0]*v[1];
+	v[2] = (1 + v[3])*(v[0]*v[1]);
 
 RESULT(v[2])
 
@@ -57,12 +57,17 @@ EQUATION( "basic_total" )
 	/*
 	Total expenditure with basic income
 	*/
+	
+	v[0] = 0;
+	
+CYCLE(cur, "Consumer")
+	{
 
-	v[0] = V("basic");
-	v[1] = V("N");
-	v[2] = v[0]*v[1];
+	v[1] = V("basic");
+	v[0] = v[0] + v[1];
+	}
 
-RESULT(v[2])
+RESULT(v[0])
 
 
 EQUATION( "Q_fc" )
@@ -232,11 +237,12 @@ EQUATION( "state_b_it" )
 	v[0] = VL("Mw_t", 1);			// Each Workers' amount of money in t-1
 	v[1] = V("Yw_t");				// Workers' disposable income in t
 	v[2] = V("Cw_t");				// Workers' consumption in t
-	
-	if (v[0] + v[1] < v[2])			// Evaluates worker finance consumption with debt 
+	v[3] = V("leque");
+	if (v[0] + v[1] < v[2] || v[3] >= 1)	// Evaluates worker finance consumption with debt 
 		v[2] = 1;				// If it is true, the worker is borrowing
 	else
 		v[2] = 0;				// If not, the worker doesn't borrow
+
 
 RESULT( v[2] )
 
@@ -244,19 +250,41 @@ RESULT( v[2] )
 EQUATION( "Yw_t" )
 
 	/*
-	Workers' disposable income. Eq. (23)
+	Workers' Total income. Eq. (23)
 	*/
 
 	v[0] = V("w_it");				// Wage in t
 	v[1] = V("i");				// Interest rate
 	v[2] = VL("D_t", 1);			// Workers' debt in t-1
 	v[3] = V("basic");			// Renda básica
-	v[4] = V("tax"); // Tax over total income (in %)
 	
 	v[5] = v[0] - v[1]*v[2] + v[3];
-	v[5] = (1-v[4])*v[5];
 
 RESULT( v[5] )
+
+
+EQUATION("Ydw_t")
+/*
+Workers' DISPOSABLE Income
+*/
+
+v[0] = VS(cur, "Tax");
+v[1] = V("Yw_t");
+v[2] = (1-v[0])*v[1];
+
+RESULT( v[2] )
+
+EQUATION("Tax_w")
+/*
+Workers' tax payment
+*/
+
+v[0] = V("Tax");
+v[1] = V("Yw_t");
+v[2] = v[0]*v[1];
+
+RESULT( v[2] )
+
 
 
 EQUATION( "Sw" )
@@ -265,7 +293,7 @@ EQUATION( "Sw" )
 	Workers' savings. p. 7
 	*/
 
-	v[0] = V("Yw_t");				// Workers' disposable income in t
+	v[0] = V("Ydw_t");				// Workers' disposable income in t
 	v[1] = V("Cw_t");				// Workers' consumption in t
 	
 	v[2] = v[0] - v[1];
@@ -297,7 +325,7 @@ EQUATION( "Ww_t" )
 	*/
 
 	v[0] = VL("Ww_t", 1);			// Workers' wealth in t-1
-	v[1] = V("Yw_t");				// Workers' disposable income in t
+	v[1] = V("Ydw_t");				// Workers' disposable income in t
 	v[2] = V("Cw_t");				// Workers' consumption in t
 
 	v[3] = v[0] + v[1] - v[2];
@@ -399,17 +427,18 @@ EQUATION( "Cw_t" )
 	v[0] = V("spsi");				// Propensity to save out of workers' income
 	v[1] = V("w_it");				// Wage in t
 	v[2] = V("eta");				// Sensitivity to workers’ relative income
-	v[3] = V("wbarocc");			// Average wage of employed workers in t-1
+	v[3] = VL("wbarocc",1);			// Average wage of employed workers in t-1
 	v[4] = V("sigmapsi");			// Propensity to save out of workers' wealth
 	v[5] = VL("Ww_t", 1);			// Workers' wealth in t-1
-	v[7] = V("Yw_t");				// DISPOSABLE Income in t
+	v[7] = V("Ydw_t");				// DISPOSABLE Income in t
+	v[8] = VL("w_it",1);
 
-	v[6] = (1 - v[0])*v[7]  + (1 - v[4])*v[5] + v[2]*(v[3] - v[1]); //SIMPLIFICADO
+	v[6] = (1 - v[0])*v[7]  + (1 - v[4])*v[5] + v[2]*(v[3] - v[8]); //SIMPLIFICADO
 
-	if(v[6] < 0)				// Evaluates if workers' consumption is negative
-		v[6] = 0;				// If it is true, set as 0
-	else
-		v[6] = v[6];
+//	if(v[6] < 0)				// Evaluates if workers' consumption is negative
+//		v[6] = 0;				// If it is true, set as 0
+//	else
+//		v[6] = v[6];
 
 RESULT( v[6] )
 
@@ -562,7 +591,7 @@ RESULT( v[3] )
 EQUATION( "Yw_total" )
 
 	/*
-	Workers' Total disposable income
+	Workers' Total income
 	*/
 
 	v[0] = 0;
@@ -599,9 +628,11 @@ EQUATION( "w_last" )
 	Just for code consistency. Returns de last wage of wich worker.
 	*/
 	
-	v[0] = VL("w_it", 1);
+	v[0] = V("leque");
+	v[1] = V("minsal_t");
+	v[2] = v[0]*v[1];
 	
-RESULT( v[0] )
+RESULT( v[2] )
 
 
 EQUATION( "inflation" )
@@ -648,11 +679,15 @@ EQUATION( "w_it" )
 	v[1] = V("inflation");			// Inflation rate
 	v[2] = V("g_it");
 	v[3] = V("minsal_t");			// minimun salary in t
+	if (v[1] >= 0){
+		v[4] = v[0]*(1 + v[1]);//*(1 + v[2]); 	// current wage. Salary in t-1 updated by inflation and the shock (g_it)
+	} else {
+		v[4] = v[0];
+		}
 	
-	v[4] = v[0]*(1 + v[1])*(1 + v[2]); 	// current wage. Salary in t-1 updated by inflation and the shock (g_it)
 	
-	if (v[4] < v[3]) 				// Evaluates if current wages is below the minimum one.
-		v[4] = v[3]; 			// If it is true, then set the wage as minimum.
+//	if (v[4] < v[3]) 				// Evaluates if current wages is below the minimum one.
+//		v[4] = v[3]; 			// If it is true, then set the wage as minimum.
 
 	v[5] = VL("state_it",1);
 	v[4] = v[4]*v[5]; 			// If unemployed, w_it = 0
@@ -769,7 +804,7 @@ EQUATION( "Y_total" )
 	*/
 
 	v[0] = V("Yw_total");			// Workers' total income
-	
+	v[1] = V("Yf_t");
 	v[2] = v[0];
 
 RESULT( v[2] )
@@ -795,19 +830,17 @@ EQUATION("Tax_Total")
 Government total revenue collect at consumers disposable income
 */
 
-v[0] = V("tax");
-
-v[1] = 0; // Counter
+v[0] = 0; // Counter
 
 CYCLE(cur, "Consumer")
 		{
-		v[2] = VS(cur, "Yw_t"); // Consumer Disposable income (Total - Tax)
-		v[2] = v[2]/(1-v[0]); // Consumer total income
-		v[2] = v[2]*v[0]; // Only tax
-		v[1] = v[1] + v[2];
+		v[1] = VS(cur, "Tax_w"); // Consumer Tax payment
+		v[0] = v[0] + v[1];
 		}
 
-RESULT( v[1] )
+	v[2] = v[0];
+	
+RESULT( v[2] )
 
 EQUATION("Gov_Balance")
 /*
@@ -829,7 +862,8 @@ Government debt
 v[0] = V("i"); // Interest rate
 v[1] = V("Gov_Balance");
 v[2] = VL("Gov_Debt",1);
-v[3] = v[1] + v[2]*(1-v[0]);
+v[3] = (1+v[0])*v[2] - v[1];
+
 
 RESULT( v[3] )
 
