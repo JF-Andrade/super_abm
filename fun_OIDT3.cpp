@@ -427,13 +427,12 @@ EQUATION( "Cw_t" )
 	v[0] = V("spsi");				// Propensity to save out of workers' income
 	v[1] = V("w_it");				// Wage in t
 	v[2] = V("eta");				// Sensitivity to workers’ relative income
-	v[3] = VL("wbarocc",1);			// Average wage of employed workers in t-1
+	v[3] = V("wbarocc");			// Average wage of employed workers in t-1
 	v[4] = V("sigmapsi");			// Propensity to save out of workers' wealth
 	v[5] = VL("Ww_t", 1);			// Workers' wealth in t-1
 	v[7] = V("Ydw_t");				// DISPOSABLE Income in t
-	v[8] = VL("w_it",1);
-
-	v[6] = (1 - v[0])*v[7]  + (1 - v[4])*v[5] + v[2]*(v[3] - v[8]); //SIMPLIFICADO
+	
+	v[6] = (1 - v[0])*v[7]  + (1 - v[4])*v[5] + v[2]*(v[3] - v[1]); //SIMPLIFICADO
 
 //	if(v[6] < 0)				// Evaluates if workers' consumption is negative
 //		v[6] = 0;				// If it is true, set as 0
