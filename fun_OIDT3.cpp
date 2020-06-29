@@ -45,11 +45,11 @@ EQUATION( "basic" )
 	
 	v[0] = V("minsal_t");	// minimum wage in t
 	v[1] = V("p_minsal");	// % sal min renda básica
-	v[3] = V("c_basic");	// basic income growth
+	v[2] = V("c");	// basic income growth. CHANGED: Same than gov expend.
 
-	v[2] = (1 + v[3])*(v[0]*v[1]);
+	v[3] = (1 + v[2])*(v[0]*v[1]);
 
-RESULT(v[2])
+RESULT(v[3])
 
 
 EQUATION( "basic_total" )
@@ -58,16 +58,7 @@ EQUATION( "basic_total" )
 	Total expenditure with basic income
 	*/
 	
-	v[0] = 0;
-	
-CYCLE(cur, "Consumer")
-	{
-
-	v[1] = V("basic");
-	v[0] = v[0] + v[1];
-	}
-
-RESULT(v[0])
+RESULT( SUM("basic") )
 
 
 EQUATION( "Q_fc" )
@@ -238,7 +229,8 @@ EQUATION( "state_b_it" )
 	v[1] = V("Yw_t");				// Workers' disposable income in t
 	v[2] = V("Cw_t");				// Workers' consumption in t
 	v[3] = V("leque");
-	if (v[0] + v[1] < v[2] || v[3] >= 1)	// Evaluates worker finance consumption with debt 
+//	if (v[0] + v[1] < v[2] || v[3] >= 1)	// Evaluates worker finance consumption with debt 
+		if(v[3] >=1)
 		v[2] = 1;				// If it is true, the worker is borrowing
 	else
 		v[2] = 0;				// If not, the worker doesn't borrow
@@ -307,15 +299,8 @@ EQUATION( "Sw_total" )
 	Workers' Total savigns
 	*/
 
-	v[0] = 0;
-	
-	CYCLE(cur, "Consumer")
-		{
-		v[1] = VS(cur, "Sw");
-		v[0] = v[0] + v[1];
-		}
 
-RESULT( v[0] )
+RESULT( SUM("Sw") )
 
 
 EQUATION( "Ww_t" )
@@ -344,15 +329,7 @@ EQUATION( "Ww_total" )
 	Workers' Total Wealth.
 	*/
 
-	v[0] = 0;
-	
-	CYCLE(cur, "Consumer")
-		{
-		v[1] = VS(cur, "Ww_t");
-		v[0] = v[0] + v[1];
-		}
-
-RESULT( v[0] )
+RESULT( SUM("Ww_t") )
 
 
 EQUATION( "Mw_t" )
@@ -375,15 +352,8 @@ EQUATION( "Mw_total" )
 	Workers' Total demand for money. Eq. (29)
 	*/
 
-	v[0] = 0;
-	
-	CYCLE(cur, "Consumer")
-		{
-		v[1] = VS(cur, "Mw_t");
-		v[0] = v[0] + v[1];
-		}
 
-RESULT( v[0] )
+RESULT( SUM("Mw_t") )
 
 
 EQUATION( "D_t" )
@@ -398,7 +368,7 @@ EQUATION( "D_t" )
 
 	v[3] = v[0] - (v[1] + v[2]);
 
-RESULT( v[4] )
+RESULT( v[3] )
 
 
 EQUATION( "D_total" )
@@ -407,15 +377,8 @@ EQUATION( "D_total" )
 	Workers' TOTAL debt derived from Eq. (30)
 	*/
 
-	v[0] = 0;
-	
-	CYCLE(cur, "Consumer")
-		{
-		v[1] = VS(cur, "D_t");
-		v[0] = v[0] + v[1];
-		}
 
-RESULT( v[0] )
+RESULT( SUM("D_t") )
 
 
 EQUATION( "Cw_t" )
@@ -448,15 +411,8 @@ EQUATION( "Cw_total" )
 	Workers' Total Consumption. Eq. (32)
 	*/
 
-	v[0] = 0;
-	
-	CYCLE(cur, "Consumer")
-		{
-		v[1] = VS(cur, "Cw_t");
-		v[0] = v[0] + v[1];
-		}
 
-RESULT( v[0] )
+RESULT( SUM("Cw_t") )
 
 
 EQUATION( "Wfinance" )
@@ -572,14 +528,8 @@ EQUATION( "wbarocc" )
 	Average wage of employed workers
 	*/
 
-	v[0] = 0;
+	v[0] = SUM("w_it");
 	
-	CYCLE( cur, "Consumer")
-		{
-		v[1] = VLS(cur, "w_it", 1);
-		v[0] = v[0] + v[1];
-		}					// Calculate the sum of wage of employed workers
-
 	v[2] = VL("EL_t", 1);			// Number of employed workers
 
 	v[3] = v[0]/v[2];
@@ -593,16 +543,7 @@ EQUATION( "Yw_total" )
 	Workers' Total income
 	*/
 
-	v[0] = 0;
-	
-	CYCLE( cur, "Consumer" )
-		{
-		v[1] = VS(cur, "Yw_t");
-		v[0] = v[0] + v[1];
-		}
-
-RESULT( v[0] )
-
+RESULT( SUM("Yw_t") )
 
 EQUATION( "minsal_t" )
 
@@ -611,7 +552,7 @@ EQUATION( "minsal_t" )
 	*/
 	
 	v[0] = VL("minsal_t", 1); 		// minsal in t-1
-	v[1] = V("inflation");			// Inflation rate
+	v[1] = VL("inflation",1);			// Inflation rate. To fix deadlock error
 	
 	if (v[1] > 0)
 		v[2] = v[0]*(1 + v[1]); 		// minimun salary in t
@@ -628,7 +569,7 @@ EQUATION( "w_last" )
 	*/
 	
 	v[0] = V("leque");
-	v[1] = V("minsal_t");
+	v[1] = VL("minsal_t", 1); // -1 to avoid instability
 	v[2] = v[0]*v[1];
 	
 RESULT( v[2] )
@@ -675,7 +616,7 @@ EQUATION( "w_it" )
 	*/
 	
 	v[0] = V("w_last");			// wage in t-1
-	v[1] = V("inflation");			// Inflation rate
+	v[1] = VL("inflation",1);			// Inflation rate. To Fix Deadlock error
 	v[2] = V("g_it");
 	v[3] = V("minsal_t");			// minimun salary in t
 	if (v[1] >= 0){
@@ -743,15 +684,7 @@ EQUATION( "numOfBorrowWorkers_t" )
 	Number of Borrowers
 	*/
 	
-	v[0] = 0;
-	
-	CYCLE(cur, "Consumer")
-		{
-		v[1] = VS(cur, "state_b_it");
-		v[0] = v[0] + v[1];
-		}
-
-RESULT( v[0] )
+RESULT( SUM("state_b_it") )
 
 
 EQUATION( "shareOfBorrWorkers_t" )
@@ -829,17 +762,7 @@ EQUATION("Tax_Total")
 Government total revenue collect at consumers disposable income
 */
 
-v[0] = 0; // Counter
-
-CYCLE(cur, "Consumer")
-		{
-		v[1] = VS(cur, "Tax_w"); // Consumer Tax payment
-		v[0] = v[0] + v[1];
-		}
-
-	v[2] = v[0];
-	
-RESULT( v[2] )
+RESULT( SUM("Tax_w") )
 
 EQUATION("Gov_Balance")
 /*
