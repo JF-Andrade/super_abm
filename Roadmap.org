@@ -96,18 +96,29 @@
      - OBS: Parâmetro $\sigma_\psi$ com elevado desvio-padrão torna o modelo instável.
    - [X] Escrever apresentação dos slides (João Paulo)
 
-** TODO Aprimoramento 01 [1/3] [33%]
+** TODO Aprimoramento 01 [2/3] [66%]
    DEADLINE: <2020-07-03 sex>
    - [ ] Poupança dos trabalhadores -> Acúmulo de riqueza gerando renda (depósito bancário)
-   - [ ] Distribuição dos salários a partir de uma distribuição de Pareto
+     - Atenção: Modelo instável com juros maior que zero
+     - Sugestão: Fazer que a remuneração dos depósitos seja nula
+   - [X] Distribuição dos salários a partir de uma distribuição de Pareto
+     - Implementado. Resta resolver problemas de calibragem
    - [X] Salário em função do salário mínimo (substituindo choques)
      - Criada variável leque
  
-** TODO Aprimoramento 02 [1/4] [25%]
+** TODO Aprimoramento 02 [3/4] [75%]
    DEADLINE: <2020-07-07 ter>
    - [X] Restrição de crédito
      - Com $\eta > 0$, consumidores passaram a ter acesso a crédito
-   - [ ] Reintrodução dos administradores
+   - [X] Reintrodução dos administradores
+     - Temporariamente não vamos seguir por questões teóricas
+       - Problemas
+         - Hipótese implícita de que todos os administradores estão empregados
+           - Sugestão: Tratar como capitalistas (proprietários e não empregados)
+         - Dificuldade em agentizar: copiar objetos? Mesmos parâmetros para todos?
+         - Dificuldade teórica de justicar a renda mínima para eles
+         - Dificuldade do cálculo do gini com os administradores
+         - Como deve ficar o salário médio dos empregados? Deve incluir os administradores?
    - [X] Reintrodução das ações
      - Sugestão: Inclusão de ações requer uma função Tobiniquiana de alocação de ativos.
        - Gabriel: Melhor não ir por aí. Podemos terminar o trabalho sem ações.
