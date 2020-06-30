@@ -88,25 +88,33 @@
 
 * Próximos passos
 
-** TODO Fim versão mais simples [0/4] [0%]
+** TODO Fim versão mais simples [4/4] [100%]
    DEADLINE: <2020-06-30 ter>
-   - [ ] Definir o outro gasto autônomo (diferente da renda básica) e estrutura (Jordão)
-   - [ ] Se gasto do governo, definir arrecadação (Gabriel)
-   - [ ] Atribuir parâmetros para cada agente (tornar mais ABM)
-   - [ ] Escrever apresentação dos slides (João Paulo)
+   - [X] Definir o outro gasto autônomo (diferente da renda básica) e estrutura (Jordão)
+   - [X] Se gasto do governo, definir arrecadação (Gabriel)
+   - [X] Atribuir parâmetros para cada agente (tornar mais ABM)
+     - OBS: Parâmetro $\sigma_\psi$ com elevado desvio-padrão torna o modelo instável.
+   - [X] Escrever apresentação dos slides (João Paulo)
 
-** TODO Aprimoramento 01 [0/3] [0%]
+** TODO Aprimoramento 01 [1/3] [33%]
    DEADLINE: <2020-07-03 sex>
    - [ ] Poupança dos trabalhadores -> Acúmulo de riqueza gerando renda (depósito bancário)
    - [ ] Distribuição dos salários a partir de uma distribuição de Pareto
-   - [ ] Salário em função do salário mínimo (substituindo choques)
+   - [X] Salário em função do salário mínimo (substituindo choques)
+     - Criada variável leque
  
-** TODO Aprimoramento 02 [0/4] [0%]
+** TODO Aprimoramento 02 [1/4] [25%]
    DEADLINE: <2020-07-07 ter>
-   - [ ] Restrição de crédito
+   - [X] Restrição de crédito
+     - Com $\eta > 0$, consumidores passaram a ter acesso a crédito
    - [ ] Reintrodução dos administradores
-   - [ ] Reintrodução das ações
-   - [ ] Reintrodução de inflação
+   - [X] Reintrodução das ações
+     - Sugestão: Inclusão de ações requer uma função Tobiniquiana de alocação de ativos.
+       - Gabriel: Melhor não ir por aí. Podemos terminar o trabalho sem ações.
+   - [X] Reintrodução de inflação
+     - Preço se tornou igual a unidade. 
+       - Razão: Valores nominais e reais são iguais.
+       - Decisão: Não incluir inflação.
 
 ** TODO Aprimoramento 03  [0%]
    DEADLINE: <2020-07-07 ter>
