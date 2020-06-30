@@ -101,6 +101,10 @@ Label Root
 		Var: size_unemp
 		Var: wbarocc
 		Param: shape
+		Param: pareto_mean
+		Var: Gini_bTax
+		Var: Gini_aTax
+		Var: Gini_wages
 
 	}
 
@@ -135,7 +139,11 @@ Var: shareOfBorrWorkers_t 0 s + n n
 Var: shareOfNonBorrWorkers_t 0 n + n n
 Var: size_unemp 0 n + n n
 Var: wbarocc 0 s + n n
-Param: shape 0 n + n n	2
+Param: shape 0 n + n n	1
+Param: pareto_mean 0 n + n n	0.5
+Var: Gini_bTax 0 s + n n
+Var: Gini_aTax 0 s + n n
+Var: Gini_wages 0 s + n n
 
 Object: Government C	1
 Var: Auton 1 s + n n	3
@@ -358,7 +366,32 @@ END_DESCRIPTION
 Parameter_shape
 (no description available)
 _INIT_
-All 1 instances equal to 2.
+All 1 instances equal to 1.
+END_DESCRIPTION
+
+Parameter_pareto_mean
+(no description available)
+_INIT_
+All 1 instances equal to 0.5.
+END_DESCRIPTION
+
+Variable_Gini_bTax
+Gini calculation before taxes
+Gini calculation before taxes
+_INIT_
+
+END_DESCRIPTION
+
+Variable_Gini_aTax
+Gini calculation after taxes
+
+
+END_DESCRIPTION
+
+Variable_Gini_wages
+Gini calculation of wages
+
+
 END_DESCRIPTION
 
 Object_Government
@@ -386,9 +419,9 @@ _INIT_
 END_DESCRIPTION
 
 Parameter_i
-(no description available)
+'i' appears in the equation for: A_t, Yw_t, Wfinance, Yf_t, Gov_Debt
 _INIT_
-
+All 1 instances equal to 0.
 END_DESCRIPTION
 
 Variable_minsal_t
@@ -495,7 +528,6 @@ END_DESCRIPTION
 
 Parameter_gamma_u
 (no description available)
-
 _INIT_
 All 1 instances equal to 0.1.
 END_DESCRIPTION

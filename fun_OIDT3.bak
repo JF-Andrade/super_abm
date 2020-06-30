@@ -580,9 +580,10 @@ EQUATION("leque")
 Leque salarial com distribuição de pareto com shape=1 e mean=1 tal como no artigo original
 */
 v[0] = V("shape");
-v[1] = pareto(1, v[0]);
+v[1] = V("pareto_mean");
+v[2] = pareto(v[1], v[0]);
 PARAMETER
-RESULT(v[1])
+RESULT(v[2])
 
 
 EQUATION( "inflation" )
@@ -799,6 +800,80 @@ v[3] = (1+v[0])*v[2] - v[1];
 
 RESULT( v[3] )
 
+EQUATION("Gini_bTax")
+/*
+Gini calculation before taxes
+*/
+
+v[0] = V("N");
+v[1] = SUM("Yw_t"); // Sum all income
+v[2] = v[0]*v[1]; // Denominador
+v[3] = 1; // Consumer index start from 1 to N
+v[4] = 0; // Resultado do numerador
+SORT( "Consumer", "Yw_t", "UP" ); // Values must be sorted
+
+CYCLE(cur, "Consumer")
+	{
+	v[5] = VS(cur, "Yw_t");
+	v[6] = (2*v[3] - v[0] - 1)*v[5];
+	v[4] = v[4] + v[6];
+	v[3] = v[3] + 1;
+	}
+	
+v[7] = v[4]/v[2];
+
+
+RESULT(v[7])
+
+EQUATION("Gini_aTax")
+/*
+Gini calculation after taxes
+*/
+
+v[0] = V("N");
+v[1] = SUM("Ydw_t"); // Sum all income
+v[2] = v[0]*v[1]; // Denominador
+v[3] = 1; // Consumer index start from 1 to N
+v[4] = 0; // Resultado do numerador
+SORT( "Consumer", "Ydw_t", "UP" ); // Values must be sorted
+
+CYCLE(cur, "Consumer")
+	{
+	v[5] = VS(cur, "Ydw_t");
+	v[6] = (2*v[3] - v[0] - 1)*v[5];
+	v[4] = v[4] + v[6];
+	v[3] = v[3] + 1;
+	}
+	
+v[7] = v[4]/v[2];
+
+
+RESULT(v[7])
+
+EQUATION("Gini_wages")
+/*
+Gini calculation of wages
+*/
+
+v[0] = V("N");
+v[1] = SUM("w_it"); // Sum all income
+v[2] = v[0]*v[1]; // Denominador
+v[3] = 1; // Consumer index start from 1 to N
+v[4] = 0; // Resultado do numerador
+SORT( "Consumer", "w_it", "UP" ); // Values must be sorted
+
+CYCLE(cur, "Consumer")
+	{
+	v[5] = VS(cur, "Yw_t");
+	v[6] = (2*v[3] - v[0] - 1)*v[5];
+	v[4] = v[4] + v[6];
+	v[3] = v[3] + 1;
+	}
+	
+v[7] = v[4]/v[2];
+
+
+RESULT(v[7])
 
 
 MODELEND
