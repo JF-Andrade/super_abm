@@ -154,7 +154,7 @@ Param: delta 0 n + n n	0.02
 Var: A_t 0 s + n n
 Var: B_t 1 n + n n	0
 Var: I_t 1 s + n n	2
-Var: K_t 1 s + n n	3200
+Var: K_t 1 s + n n	4000
 Var: Q_fc 1 s + n n	800
 Var: u_t 1 s + n n	0.5
 Param: gamma_u 0 n + n n	0.1
@@ -471,15 +471,13 @@ Variable_K_t
 'K_t' appears in the equation for: Q_fc, K_t
 
 _INIT_
-All 1 instances equal to 3200.
+All 1 instances equal to 4000.
 END_DESCRIPTION
 
 Variable_Q_fc
 Full capacity output - ALTERADO
-
 _INIT_
 All 1 instances equal to 800.
-
 END_DESCRIPTION
 
 Variable_u_t
