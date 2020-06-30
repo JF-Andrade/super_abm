@@ -1,0 +1,6 @@
+Model Essay_Version (ver. 0.1)
+
+Versão simplificada e modificada do modelo AB-SFC de Carvalho e Di Guilmi (2014).
+
+(PRESS CTRL+E TO EDIT EQUATIONS)
+
