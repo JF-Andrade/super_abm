@@ -45,7 +45,7 @@ EQUATION( "basic" )
 	
 	v[0] = V("minsal_t");	// minimum wage in t
 	v[1] = V("p_minsal");	// % sal min renda básica
-	v[2] = VS("c");	// basic income growth. CHANGED: Same than gov expend.
+	v[2] = V("c");	// basic income growth. CHANGED: Same than gov expend.
 
 	v[3] = (1 + v[2])*(v[0]*v[1]);
 
@@ -573,6 +573,16 @@ EQUATION( "w_last" )
 	v[2] = v[0]*v[1];
 	
 RESULT( v[2] )
+
+
+EQUATION("leque")
+/*
+Leque salarial com distribuição de pareto com shape=1 e mean=1 tal como no artigo original
+*/
+v[0] = V("shape");
+v[1] = pareto(1, v[0]);
+PARAMETER
+RESULT(v[1])
 
 
 EQUATION( "inflation" )

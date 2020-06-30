@@ -575,6 +575,17 @@ EQUATION( "w_last" )
 RESULT( v[2] )
 
 
+EQUATION("leque")
+/*
+Leque salarial com distribuição de pareto com shape=1 e mean=1 tal como no artigo original
+*/
+v[0] = V("shape");
+v[1] = V("pareto_mean");
+v[2] = pareto(v[1], v[0]);
+PARAMETER
+RESULT(v[2])
+
+
 EQUATION( "inflation" )
 
 	/*
