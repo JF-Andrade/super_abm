@@ -181,7 +181,7 @@ Param: faixa_2 0 n + n n	2
 Param: faixa_3 0 n + n n	5
 Var: Gini_aTax 0 s + n n
 Param: flag_transf 0 n + n n	0
-Param: flag_progress 0 n + n n	0
+Param: flag_progress 0 n + n n	1
 Param: tax_1 0 n + n n	0.1
 Param: tax_2 0 n + n n	0.2
 Param: tax_3 0 n + n n	0.4
@@ -433,7 +433,6 @@ END_DESCRIPTION
 Parameter_c
 Valor base: 0.01. 
 Testando 0.0 com função Kaleckiana
-
 _INIT_
 All 1 instances equal to 0.01.
 END_DESCRIPTION
@@ -546,8 +545,9 @@ END_DESCRIPTION
 
 Parameter_flag_progress
 (no description available)
+
 _INIT_
-All 1 instances equal to 0.
+All 1 instances equal to 1.
 END_DESCRIPTION
 
 Parameter_tax_1
