@@ -126,14 +126,19 @@ if (v[20] == 1){
 	v[9] = V("valuation_param");					// Valuation ratio coefficient
 	v[10] = VL("Pe_t", 1);				// Stock price in t-1
 	v[11] = VL("E_t", 1);				// Equity amount
-
+	v[0] = V("c"); // Autonomous expenditure growth rate
 	v[12] = (v[0]*v[1] + v[2]*v[3])*v[4]*v[5];// 1st term of I_t
 	v[13] = -v[0]*v[1]*v[4]*v[8];			// 2nd term of I_t
 	v[14] = v[9]*v[10]*v[11];			// 3rd term of I_t
+	v[16] = VL("u_t",1);
 
-	//v[15] = v[12] + v[13] + v[14];		// Firm's investment
-	v[15] = v[12] + v[14]; // Not reactiong to Un
+	if(V("flag_dutt") == 0 && V("flag_marglin") == 1){ // Assegura que não são simultaneos
+
+		v[15] = v[0] + v[12] + v[14]; // Not reactiong to Un
+	} else if (V("flag_dutt") == 1 && V("flag_marglin") == 0){
+		v[15] = (v[0] + v[2]*v[3] + v[1]*v[16])*v[7];
 	}
+}
 
 RESULT( v[15] )
 

@@ -53,6 +53,8 @@ Label Root
 			Param: valuation_param
 			Param: E_t
 			Param: Pe_t
+			Param: flag_dutt
+			Param: flag_marglin
 
 		}
 
@@ -161,7 +163,7 @@ Var: Gini_bTax 0 s + n n
 
 Object: Government C	1
 Var: Auton 1 s + n n	3
-Param: c 0 n + n n	0
+Param: c 0 n + n n	0.01
 Param: p_minsal 0 n + n n	0.2
 Param: i 0 n + n n	0
 Var: minsal_t 1 n + n n	0.1
@@ -179,7 +181,7 @@ Param: faixa_2 0 n + n n	2
 Param: faixa_3 0 n + n n	5
 Var: Gini_aTax 0 s + n n
 Param: flag_transf 0 n + n n	0
-Param: flag_progress 0 n + n n	0
+Param: flag_progress 0 n + n n	1
 Param: tax_1 0 n + n n	0.1
 Param: tax_2 0 n + n n	0.2
 Param: tax_3 0 n + n n	0.4
@@ -196,12 +198,14 @@ Param: gamma_u 0 n + n n	0.1
 Var: h 1 s + n n	0.1
 Param: mu 0 n + n n	0.1
 Param: ud 0 n + n n	0.8
-Param: flag_super 0 n + n n	0
-Param: gap_param 0 n + n n	0.2
-Param: profit_param 0 n + n n	0.2
+Param: flag_super 0 n + n n	1
+Param: gap_param 0 n + n n	0.1
+Param: profit_param 0 n + n n	0.07
 Param: valuation_param 0 n + n n	0.1
 Param: E_t 0 n + n n	0
 Param: Pe_t 0 n + n n	0
+Param: flag_dutt 0 n + n n	0
+Param: flag_marglin 0 n + n n	1
 
 Object: Banks C	1
 Var: Yf_t 0 s + n n
@@ -430,7 +434,7 @@ Parameter_c
 Valor base: 0.01. 
 Testando 0.0 com função Kaleckiana
 _INIT_
-All 1 instances equal to 0.
+All 1 instances equal to 0.01.
 END_DESCRIPTION
 
 Parameter_p_minsal
@@ -441,7 +445,6 @@ END_DESCRIPTION
 
 Parameter_i
 'i' appears in the equation for: A_t, Yw_t, Wfinance, Yf_t, Gov_Debt
-
 _INIT_
 All 1 instances equal to 0.
 END_DESCRIPTION
@@ -542,8 +545,9 @@ END_DESCRIPTION
 
 Parameter_flag_progress
 (no description available)
+
 _INIT_
-All 1 instances equal to 0.
+All 1 instances equal to 1.
 END_DESCRIPTION
 
 Parameter_tax_1
@@ -642,19 +646,19 @@ Parameter_flag_super
 Super: 1
 Kaleckian: 0
 _INIT_
-All 1 instances equal to 0.
+All 1 instances equal to 1.
 END_DESCRIPTION
 
 Parameter_gap_param
 'gap_param' appears in the equation for: I_t
 _INIT_
-All 1 instances equal to 0.2.
+All 1 instances equal to 0.1.
 END_DESCRIPTION
 
 Parameter_profit_param
-(no description available)
+Base Dutt value: 0.2
 _INIT_
-All 1 instances equal to 0.2.
+All 1 instances equal to 0.07.
 END_DESCRIPTION
 
 Parameter_valuation_param
@@ -673,6 +677,18 @@ Parameter_Pe_t
 Our simplified version does not have equities
 _INIT_
 All 1 instances equal to 0.
+END_DESCRIPTION
+
+Parameter_flag_dutt
+(no description available)
+_INIT_
+All 1 instances equal to 0.
+END_DESCRIPTION
+
+Parameter_flag_marglin
+(no description available)
+_INIT_
+All 1 instances equal to 1.
 END_DESCRIPTION
 
 Object_Banks
