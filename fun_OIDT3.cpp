@@ -103,6 +103,8 @@ RESULT( v[2] )
 
 EQUATION( "I_t" )
 
+v[20] = V("flag_super");
+if (v[20] == 1){
 	/*
 	Investimento super
 	*/
@@ -110,8 +112,30 @@ EQUATION( "I_t" )
 	v[0] = VL("Q_t",1);
 	v[1] = VL("h",1);
 	v[2] = v[0]*v[1];
+	v[15] = v[2]; // For compability reasons
+	} else {
+	v[0] = V("gap_param");				// Utilization gap coefficient
+	v[1] = V("gamma"); 				// 
+	v[2] = V("profit_param");					// Profit rate coefficient
+	v[3] = V("pi");					// Profit-share
+	v[4] = V("price_t");			// price in t. CHANGED: it is price_t insted price_t-1
+	v[5] = VL("Q_t", 1);				// Total output in t-1
+	v[6] = V("ud");
+	v[7] = VL("K_t", 1);
+	v[8] = (v[6]*v[7])/v[1];			// Qd
+	v[9] = V("valuation_param");					// Valuation ratio coefficient
+	v[10] = VL("Pe_t", 1);				// Stock price in t-1
+	v[11] = VL("E_t", 1);				// Equity amount
 
-RESULT( v[2] )
+	v[12] = (v[0]*v[1] + v[2]*v[3])*v[4]*v[5];// 1st term of I_t
+	v[13] = -v[0]*v[1]*v[4]*v[8];			// 2nd term of I_t
+	v[14] = v[9]*v[10]*v[11];			// 3rd term of I_t
+
+	//v[15] = v[12] + v[13] + v[14];		// Firm's investment
+	v[15] = v[12] + v[14]; // Not reactiong to Un
+	}
+
+RESULT( v[15] )
 
 EQUATION( "h" )
 	
@@ -119,13 +143,19 @@ EQUATION( "h" )
 	Ajustamento
 	*/
 	
-	v[0] = VL("h",1);
-	v[1] = V("gamma_u");
-	v[2] = VL("u_t",1);
-	v[3] = V("ud");
-	
-	v[4] = v[0]*(1 + v[1]*(v[2] - v[3]));
-
+	v[20] = V("flag_super");
+	if(v[20] == 1){
+		v[0] = VL("h",1);
+		v[1] = V("gamma_u");
+		v[2] = VL("u_t",1);
+		v[3] = V("ud");
+		v[4] = v[0]*(1 + v[1]*(v[2] - v[3]));
+		} else {
+		v[0] = V("Q_t");
+		v[1] = V("I_t");
+		v[4] = v[1]/v[0];
+		}
+		
 RESULT( v[4] )
 
 
@@ -244,13 +274,14 @@ EQUATION( "Yw_t" )
 	/*
 	Workers' Total income. Eq. (23)
 	*/
-
+	v[20] = V("flag_deposits"); // 1 se depósitos remunerados, 0 caso contrário
 	v[0] = V("w_it");				// Wage in t
 	v[1] = V("i");				// Interest rate
 	v[2] = VL("D_t", 1);			// Workers' debt in t-1
 	v[3] = V("basic");			// Renda básica
+	v[4] = VL("Mw_t",1);
 	
-	v[5] = v[0] - v[1]*v[2] + v[3];
+	v[5] = v[0] - v[1]*v[2] + v[3] + v[20]*(v[1]*v[4]);
 
 RESULT( v[5] )
 
@@ -874,6 +905,49 @@ v[7] = v[4]/v[2];
 
 
 RESULT(v[7])
+
+
+EQUATION("Tax")
+/*
+Se flag_progress = 1, imposto progressivo. Caso contrário, flat
+Se flag_transf = 1, transferência de renda
+Faixas estão em termos de SM
+*/
+
+v[0] = V("flag_progress");
+v[1] = V("flag_transf");
+v[2] = V("faixa_1");
+v[3] = V("faixa_2");
+v[4] = V("faixa_3");
+v[6] = V("tax_flat");
+v[7] = V("tax_1");
+v[8] = V("tax_2");
+v[9] = V("tax_3");
+v[10] = V("tax_transf");
+
+if (v[0] == 0){
+	v[20] = v[6];
+	} else {
+	
+	CYCLE(cur, "Consumer"){
+	
+		v[5] = VS(cur, "w_it");
+		if(v[5] < V("faixa_1") && V("flag_transf") == 1){
+				v[20] = V("tax_transf"); // Deve ser negativo
+		} else if (v[5] < V("faixa_1") && V("flag_transf") == 0) {
+				v[20] = 0;
+		} else if (v[5] >= V("faixa_1") && v[5] < V("faixa_2")){
+				v[20] = V("tax_1");
+		} else if (v[5] >= V("faixa_2") && v[5] < V("faixa_3")){
+				v[20] = V("tax_2");
+		} else {
+			v[20] = V("tax_3");
+		}
+	}
+}
+
+RESULT(v[20])
+
 
 
 MODELEND
