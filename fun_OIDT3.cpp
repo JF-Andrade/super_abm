@@ -950,7 +950,7 @@ if (v[0] == 0){
 		}
 	}
 }
-
+PARAMETER // Checar
 RESULT(v[20])
 
 
