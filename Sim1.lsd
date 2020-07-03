@@ -54,6 +54,8 @@ Label Root
 			Param: Pe_t
 			Param: flag_dutt
 			Param: flag_marglin
+			Var: r
+			Param: param_auton
 
 		}
 
@@ -123,6 +125,7 @@ Label Root
 		Param: shape
 		Param: pareto_mean
 		Var: Gini_bTax
+		Param: Acesso_Credito
 
 	}
 
@@ -160,6 +163,7 @@ Var: wbarocc 0 s + n n
 Param: shape 0 n + n n	1
 Param: pareto_mean 0 n + n n	0.5
 Var: Gini_bTax 0 s + n n
+Param: Acesso_Credito 0 n + n n	1
 
 Object: Government C	1
 Var: Auton 1 s + n n	3
@@ -198,13 +202,15 @@ Var: h 1 s + n n	0.1
 Param: mu 0 n + n n	0.1
 Param: ud 0 n + n n	0.8
 Param: flag_super 0 n + n n	1
-Param: gap_param 0 n + n n	0.1
-Param: profit_param 0 n + n n	0.07
+Param: gap_param 0 n + n n	0.025
+Param: profit_param 0 n + n n	0.008
 Param: valuation_param 0 n + n n	0.1
 Param: E_t 0 n + n n	0
 Param: Pe_t 0 n + n n	0
 Param: flag_dutt 0 n + n n	0
 Param: flag_marglin 0 n + n n	1
+Var: r 0 s + n n
+Param: param_auton 0 n + n n	0.001
 
 Object: Banks C	1
 Var: Yf_t 0 s + n n
@@ -418,6 +424,13 @@ _INIT_
 
 END_DESCRIPTION
 
+Parameter_Acesso_Credito
+Acesso ao crédito em função de SM.
+1 = 1 SM
+_INIT_
+All 1 instances equal to 1.
+END_DESCRIPTION
+
 Object_Government
 (no description available)
 _INIT_
@@ -433,6 +446,7 @@ END_DESCRIPTION
 Parameter_c
 Valor base: 0.01. 
 Testando 0.0 com função Kaleckiana
+
 _INIT_
 All 1 instances equal to 0.01.
 END_DESCRIPTION
@@ -645,13 +659,13 @@ END_DESCRIPTION
 Parameter_gap_param
 'gap_param' appears in the equation for: I_t
 _INIT_
-All 1 instances equal to 0.1.
+All 1 instances equal to 0.025.
 END_DESCRIPTION
 
 Parameter_profit_param
 Base Dutt value: 0.2
 _INIT_
-All 1 instances equal to 0.07.
+All 1 instances equal to 0.008.
 END_DESCRIPTION
 
 Parameter_valuation_param
@@ -682,6 +696,18 @@ Parameter_flag_marglin
 (no description available)
 _INIT_
 All 1 instances equal to 1.
+END_DESCRIPTION
+
+Variable_r
+Profit rate
+_INIT_
+
+END_DESCRIPTION
+
+Parameter_param_auton
+Parâmetro associado ao crescimento do investimento autônomo
+_INIT_
+All 1 instances equal to 0.001.
 END_DESCRIPTION
 
 Object_Banks

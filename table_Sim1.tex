@@ -1,0 +1,440 @@
+\documentclass{article}
+
+\usepackage[a4paper,left=2.500000cm,right=2.500000cm,top=2.500000cm,bottom=2.500000cm]{geometry}
+\usepackage{color}
+\usepackage{longtable}
+\usepackage{tabu}
+
+\newcommand{\lsd}[1] {\texttt{\color{blue}{\detokenize{#1}}}}
+
+\setlength{\parindent}{0cm}
+
+\title{Model: \lsd{Sim1}}
+\author{Automatically generated LSD report}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Model Structure}
+
+\subsection{Object: \lsd{Root}} \label{Root}
+
+\emph{Containing:} \lsd{Market}
+
+\subsection{Object: \lsd{Market}} \label{Market}
+
+\emph{Contained in:} \lsd{Root}
+
+\emph{Containing:} \lsd{Government},  \lsd{Firms},  \lsd{Banks},  \lsd{Consumer}
+
+\begin{longtabu} to \textwidth {|l|l|l|X|}
+  \hline
+  \textbf{Element} & \textbf{Type} & \textbf{Lags} & \textbf{Description and initial values comments} \\ 
+  \hline \endhead
+  \multicolumn{4}{r}{\textit{Continued on next page...}} \\ 
+  \endfoot
+  \endlastfoot
+  \lsd{N} \label{N} & Parameter & & \\ 
+  \hline 
+  \lsd{gamma} \label{gamma} & Parameter & & \\ 
+  \hline 
+  \lsd{price_t} \label{price\string_t} & Parameter & & 	Calculate the price. Eq (9)\newline 	\newline All 1 instances equal to 1.\\ 
+  \hline 
+  \lsd{xi} \label{xi} & Parameter & & \\ 
+  \hline 
+  \lsd{Cw_total} \label{Cw\string_total} & Variable & & \\ 
+  \hline 
+  \lsd{EL_t} \label{EL\string_t} & Variable & 1 & \\ 
+  \hline 
+  \lsd{Q_t} \label{Q\string_t} & Variable & 1 & \\ 
+  \hline 
+  \lsd{Sw_total} \label{Sw\string_total} & Variable & & 	Workers' Total savigns\newline 	\\ 
+  \hline 
+  \lsd{UnRate} \label{UnRate} & Variable & & 	Unemployment rate\newline 	\\ 
+  \hline 
+  \lsd{W} \label{W} & Variable & & 	Total Wealth, workers and managers\newline 	\\ 
+  \hline 
+  \lsd{Y_total} \label{Y\string_total} & Variable & & 	Total income\newline 	\\ 
+  \hline 
+  \lsd{Yw_total} \label{Yw\string_total} & Variable & & 	Workers' Total disposable income\newline 	\\ 
+  \hline 
+  \lsd{Z_Q} \label{Z\string_Q} & Variable & & \\ 
+  \hline 
+  \lsd{inflation} \label{inflation} & Variable & & \\ 
+  \hline 
+  \lsd{numOfBorrowWorkers_t} \label{numOfBorrowWorkers\string_t} & Variable & & \\ 
+  \hline 
+  \lsd{numOfNonBorrowWorkers_t} \label{numOfNonBorrowWorkers\string_t} & Variable & & \\ 
+  \hline 
+  \lsd{pi} \label{pi} & Variable & & \\ 
+  \hline 
+  \lsd{psi} \label{psi} & Variable & & \\ 
+  \hline 
+  \lsd{shareOfBorrWorkers_t} \label{shareOfBorrWorkers\string_t} & Variable & & 	Share of Borrowers\newline 	\\ 
+  \hline 
+  \lsd{shareOfNonBorrWorkers_t} \label{shareOfNonBorrWorkers\string_t} & Variable & & 	Share of Non-Borrowers\newline 	\\ 
+  \hline 
+  \lsd{size_unemp} \label{size\string_unemp} & Variable & & 	Number of unemployed workers\newline 	\\ 
+  \hline 
+  \lsd{wbarocc} \label{wbarocc} & Variable & & 	Average wage of employed workers\newline 	\\ 
+  \hline 
+  \lsd{shape} \label{shape} & Parameter & & All 1 instances equal to 1.\\ 
+  \hline 
+  \lsd{pareto_mean} \label{pareto\string_mean} & Parameter & & All 1 instances equal to 0.5.\\ 
+  \hline 
+  \lsd{Gini_bTax} \label{Gini\string_bTax} & Variable & & Gini calculation before taxes\newline Gini calculation before taxes\\ 
+  \hline 
+  \lsd{Acesso_Credito} \label{Acesso\string_Credito} & Parameter & & Acesso ao crédito em função de SM.\newline 1 = 1 SM\newline All 1 instances equal to 1.\\ 
+  \hline 
+\end{longtabu}
+
+\subsection{Object: \lsd{Government}} \label{Government}
+
+\emph{Contained in:} \lsd{Root}$\rightarrow$\lsd{Market}
+
+\begin{longtabu} to \textwidth {|l|l|l|X|}
+  \hline
+  \textbf{Element} & \textbf{Type} & \textbf{Lags} & \textbf{Description and initial values comments} \\ 
+  \hline \endhead
+  \multicolumn{4}{r}{\textit{Continued on next page...}} \\ 
+  \endfoot
+  \endlastfoot
+  \lsd{Auton} \label{Auton} & Variable & 1 & All 1 instances equal to 10.\\ 
+  \hline 
+  \lsd{c} \label{c} & Parameter & & Valor base: 0.01. \newline Testando 0.0 com função Kaleckiana\newline All 1 instances equal to 0.01.\\ 
+  \hline 
+  \lsd{p_minsal} \label{p\string_minsal} & Parameter & & \\ 
+  \hline 
+  \lsd{i} \label{i} & Parameter & & 'i' appears in the equation for: A\_t, Yw\_t, Wfinance, Yf\_t, Gov\_Debt\newline All 1 instances equal to 0.\\ 
+  \hline 
+  \lsd{minsal_t} \label{minsal\string_t} & Variable & 1 & All 1 instances equal to 0.1.\\ 
+  \hline 
+  \lsd{basic_total} \label{basic\string_total} & Variable & & \\ 
+  \hline 
+  \lsd{Gov_Balance} \label{Gov\string_Balance} & Variable & & Government net Balance (+) if surplus, (-) otherwise\newline Government net Balance (+) if surplus, (-) otherwise\\ 
+  \hline 
+  \lsd{Gov_Total} \label{Gov\string_Total} & Variable & & Government total expenditure (fully autonomous)\newline Warning: DO NOT include Gov\_Total in GDP calculation. \newline Reason: basic income already included in consumers disposable income\\ 
+  \hline 
+  \lsd{Tax_Total} \label{Tax\string_Total} & Variable & & Government total revenue collect at consumers disposable income\\ 
+  \hline 
+  \lsd{c_basic} \label{c\string_basic} & Parameter & & 'c\_basic' appears in the equation for: basic\newline All 5000 instances equal to 0.01.\\ 
+  \hline 
+  \lsd{basic} \label{basic} & Variable & & \\ 
+  \hline 
+  \lsd{faixa_1} \label{faixa\string_1} & Parameter & & All 1 instances equal to 1.\\ 
+  \hline 
+  \lsd{tax_transf} \label{tax\string_transf} & Parameter & & All 1 instances equal to -0.1.\\ 
+  \hline 
+  \lsd{tax_flat} \label{tax\string_flat} & Parameter & & All 1 instances equal to 0.2.\\ 
+  \hline 
+  \lsd{faixa_2} \label{faixa\string_2} & Parameter & & All 1 instances equal to 2.\\ 
+  \hline 
+  \lsd{faixa_3} \label{faixa\string_3} & Parameter & & All 1 instances equal to 5.\\ 
+  \hline 
+  \lsd{Gini_aTax} \label{Gini\string_aTax} & Variable & & Gini calculation after taxes\\ 
+  \hline 
+  \lsd{flag_transf} \label{flag\string_transf} & Parameter & & All 1 instances equal to 0.\\ 
+  \hline 
+  \lsd{flag_progress} \label{flag\string_progress} & Parameter & & All 1 instances equal to 1.\\ 
+  \hline 
+  \lsd{tax_1} \label{tax\string_1} & Parameter & & All 1 instances equal to 0.1.\\ 
+  \hline 
+  \lsd{tax_2} \label{tax\string_2} & Parameter & & All 1 instances equal to 0.2.\\ 
+  \hline 
+  \lsd{tax_3} \label{tax\string_3} & Parameter & & All 1 instances equal to 0.4.\\ 
+  \hline 
+\end{longtabu}
+
+\subsection{Object: \lsd{Firms}} \label{Firms}
+
+\emph{Contained in:} \lsd{Root}$\rightarrow$\lsd{Market}
+
+\begin{longtabu} to \textwidth {|l|l|l|X|}
+  \hline
+  \textbf{Element} & \textbf{Type} & \textbf{Lags} & \textbf{Description and initial values comments} \\ 
+  \hline \endhead
+  \multicolumn{4}{r}{\textit{Continued on next page...}} \\ 
+  \endfoot
+  \endlastfoot
+  \lsd{delta} \label{delta} & Parameter & & \\ 
+  \hline 
+  \lsd{A_t} \label{A\string_t} & Variable & & \\ 
+  \hline 
+  \lsd{B_t} \label{B\string_t} & Variable & 1 & All 1 instances equal to 0.\\ 
+  \hline 
+  \lsd{I_t} \label{I\string_t} & Variable & 1 & All 1 instances equal to 5.\\ 
+  \hline 
+  \lsd{K_t} \label{K\string_t} & Variable & 1 & 	Capital stock equation. K in t-1 + Eq. (8)\newline 	\newline 'K\_t' appears in the equation for: Q\_fc, K\_t\newline All 1 instances equal to 3200.\\ 
+  \hline 
+  \lsd{Q_fc} \label{Q\string_fc} & Variable & 1 & Full capacity output - ALTERADO\newline All 1 instances equal to 800.\\ 
+  \hline 
+  \lsd{u_t} \label{u\string_t} & Variable & 1 & Capacity utilization equation\newline All 1 instances equal to 0.5.\\ 
+  \hline 
+  \lsd{gamma_u} \label{gamma\string_u} & Parameter & & All 1 instances equal to 0.1.\\ 
+  \hline 
+  \lsd{h} \label{h} & Variable & 1 & All 1 instances equal to 0.1.\\ 
+  \hline 
+  \lsd{mu} \label{mu} & Parameter & & \\ 
+  \hline 
+  \lsd{ud} \label{ud} & Parameter & & 'ud' appears in the equation for: h\newline All 1 instances equal to 0.8.\\ 
+  \hline 
+  \lsd{flag_super} \label{flag\string_super} & Parameter & & Super: 1\newline Kaleckian: 0\newline All 1 instances equal to 1.\\ 
+  \hline 
+  \lsd{gap_param} \label{gap\string_param} & Parameter & & 'gap\_param' appears in the equation for: I\_t\newline All 1 instances equal to 0.025.\\ 
+  \hline 
+  \lsd{profit_param} \label{profit\string_param} & Parameter & & Base Dutt value: 0.2\newline All 1 instances equal to 0.008.\\ 
+  \hline 
+  \lsd{valuation_param} \label{valuation\string_param} & Parameter & & All 1 instances equal to 0.1.\\ 
+  \hline 
+  \lsd{E_t} \label{E\string_t} & Parameter & & Our simplified version does not have equities\newline All 1 instances equal to 0.\\ 
+  \hline 
+  \lsd{Pe_t} \label{Pe\string_t} & Parameter & & Our simplified version does not have equities\newline All 1 instances equal to 0.\\ 
+  \hline 
+  \lsd{flag_dutt} \label{flag\string_dutt} & Parameter & & All 1 instances equal to 0.\\ 
+  \hline 
+  \lsd{flag_marglin} \label{flag\string_marglin} & Parameter & & All 1 instances equal to 1.\\ 
+  \hline 
+  \lsd{r} \label{r} & Variable & & Profit rate\\ 
+  \hline 
+  \lsd{param_auton} \label{param\string_auton} & Parameter & & Parâmetro associado ao crescimento do investimento autônomo\newline All 1 instances equal to 0.001.\\ 
+  \hline 
+\end{longtabu}
+
+\subsection{Object: \lsd{Banks}} \label{Banks}
+
+\emph{Contained in:} \lsd{Root}$\rightarrow$\lsd{Market}
+
+\emph{Description:}
+
+\detokenize{Financial sector. Currently not used}
+
+\begin{longtabu} to \textwidth {|l|l|l|X|}
+  \hline
+  \textbf{Element} & \textbf{Type} & \textbf{Lags} & \textbf{Description and initial values comments} \\ 
+  \hline \endhead
+  \multicolumn{4}{r}{\textit{Continued on next page...}} \\ 
+  \endfoot
+  \endlastfoot
+  \lsd{Yf_t} \label{Yf\string_t} & Variable & & 	Financial sector income. Eq. (33)\newline 	\\ 
+  \hline 
+  \lsd{Wfinance} \label{Wfinance} & Variable & & 	Financial sector wealth. From Eq. (33)\newline 	\\ 
+  \hline 
+  \lsd{M_TOTAL} \label{M\string_TOTAL} & Variable & & \\ 
+  \hline 
+  \lsd{D_total} \label{D\string_total} & Variable & 1 & All 1 instances equal to 0.\\ 
+  \hline 
+  \lsd{M_t} \label{M\string_t} & Variable & & \\ 
+  \hline 
+  \lsd{Mw_total} \label{Mw\string_total} & Variable & & \\ 
+  \hline 
+  \lsd{Gov_Debt} \label{Gov\string_Debt} & Variable & 1 & Government debt\newline All 1 instances equal to 0.\\ 
+  \hline 
+  \lsd{Ww_total} \label{Ww\string_total} & Variable & & 	Workers' Total Wealth.\newline 	\\ 
+  \hline 
+  \lsd{flag_deposits} \label{flag\string_deposits} & Parameter & & Flag sobre depósitos remunerados. Se remunerados, flag=1, 0 caso contrário\newline All 1 instances equal to 0.\\ 
+  \hline 
+\end{longtabu}
+
+\subsection{Object: \lsd{Consumer}} \label{Consumer}
+
+\emph{Contained in:} \lsd{Root}$\rightarrow$\lsd{Market}
+
+\begin{longtabu} to \textwidth {|l|l|l|X|}
+  \hline
+  \textbf{Element} & \textbf{Type} & \textbf{Lags} & \textbf{Description and initial values comments} \\ 
+  \hline \endhead
+  \multicolumn{4}{r}{\textit{Continued on next page...}} \\ 
+  \endfoot
+  \endlastfoot
+  \lsd{Cw_t} \label{Cw\string_t} & Variable & & 	Workers' consumption. Eq. (31) - ALTERADO\newline 		Workers' consumption. Eq. (31) - ALTERADO\newline 	\\ 
+  \hline 
+  \lsd{D_t} \label{D\string_t} & Variable & 1 & 	Workers' debt derived from Eq. (26)\newline 	\newline All 5000 instances equal to 0.\\ 
+  \hline 
+  \lsd{Mw_t} \label{Mw\string_t} & Variable & 1 & 	Workers’ demand for money. Eqs. (27) and (28)\newline 	\newline All 5000 instances equal to 0.\\ 
+  \hline 
+  \lsd{Sw} \label{Sw} & Variable & & 	Workers' savings. p. 7\newline 	\\ 
+  \hline 
+  \lsd{Ww_t} \label{Ww\string_t} & Variable & & 	Workers' wealth. Ww\_1 in t-1 + Eq. (25)\newline 	\\ 
+  \hline 
+  \lsd{Yw_t} \label{Yw\string_t} & Variable & & 	Workers' disposable income. Eq. (23)\newline 	\\ 
+  \hline 
+  \lsd{Ydw_t} \label{Ydw\string_t} & Variable & & Workers' DISPOSABLE Income\newline Workers' DISPOSABLE Income\\ 
+  \hline 
+  \lsd{Tax_w} \label{Tax\string_w} & Variable & & Workers' tax payment\newline Workers' tax payment\\ 
+  \hline 
+  \lsd{g_it} \label{g\string_it} & Variable & & 	Uniformly distributed shocks with mean zero in the wages.\newline 	Suggestion: set to consider the shock's amplitude.\newline 	\\ 
+  \hline 
+  \lsd{state_b_it} \label{state\string_b\string_it} & Variable & & 	State of workers - borrow behavior. 1= borrowing; 0= not borrowing. Eqs. (21) and (22)\newline 	\\ 
+  \hline 
+  \lsd{state_it} \label{state\string_it} & Variable & & 	State of worker i at time t (Inactive=0, Active=1)\newline 	\\ 
+  \hline 
+  \lsd{w_it} \label{w\string_it} & Variable & 1 & 	Updates wages by worker, evaluates wich one is below the minimum and set them to it.\newline 	\newline All 5000 instances set to random values drawn from a normal with mean=0.1 and std. deviation=0.05.\\ 
+  \hline 
+  \lsd{w_last} \label{w\string_last} & Variable & & 	Just for code consistency. Returns de last wage of wich worker.\newline 	\\ 
+  \hline 
+  \lsd{spsi} \label{spsi} & Parameter & & 'spsi' appears in the equation for: Cw\_t\newline All 5000 instances set to random values drawn from a normal with mean=0.8 and std. deviation=0.05.\\ 
+  \hline 
+  \lsd{sigmapsi} \label{sigmapsi} & Parameter & & All 5000 instances set to random values drawn from a normal with mean=0.9 and std. deviation=0.01.\\ 
+  \hline 
+  \lsd{eta} \label{eta} & Parameter & & All 5000 instances set to random values drawn from a normal with mean=0.5 and std. deviation=0.05.\\ 
+  \hline 
+  \lsd{gmin} \label{gmin} & Parameter & & All 5000 instances equal to 0.\\ 
+  \hline 
+  \lsd{gmax} \label{gmax} & Parameter & & All 5000 instances equal to 0.\\ 
+  \hline 
+  \lsd{leque} \label{leque} & Variable & & Leque salarial com distribuição de pareto com shape=1 e mean=1 tal como no artigo original\newline 'leque' appears in the equation for: state\_b\_it, w\_last\\ 
+  \hline 
+  \lsd{Tax} \label{Tax} & Variable & & \\ 
+  \hline 
+\end{longtabu}
+
+\section{Relevant elements to observe}
+
+\begin{longtabu} to \textwidth {|l|l|l|X|}
+  \hline
+  \textbf{Element} & \textbf{Object} & \textbf{Type} & \textbf{Description} \\ 
+  \hline \endhead
+  \multicolumn{4}{r}{\textit{Continued on next page...}} \\ 
+  \endfoot
+  \endlastfoot
+  \multicolumn{4}{|c|}{(none selected)} \\ 
+  \hline 
+\end{longtabu}
+
+\section{Relevant elements to initialize}
+
+\begin{longtabu} to \textwidth {|l|l|l|X|}
+  \hline
+  \textbf{Element} & \textbf{Object} & \textbf{Type} & \textbf{Description and initial values comments} \\ 
+  \hline \endhead
+  \multicolumn{4}{r}{\textit{Continued on next page...}} \\ 
+  \endfoot
+  \endlastfoot
+  \multicolumn{4}{|c|}{(none selected)} \\ 
+  \hline 
+\end{longtabu}
+
+\section{Initial values}
+
+\begin{longtabu} to \textwidth {|l|l|l|X|}
+  \hline
+  \textbf{Object} & \textbf{Element} & \textbf{Lag} & \textbf{Initial values (by instance)} \\ 
+  \hline \endhead
+  \multicolumn{4}{r}{\textit{Continued on next page...}} \\ 
+  \endfoot
+  \endlastfoot
+  \lsd{Market} & \lsd{N} & & 5000 \\ 
+  \hline 
+  \lsd{Market} & \lsd{gamma} & & 2.5 \\ 
+  \hline 
+  \lsd{Market} & \lsd{price\string_t} & & 1 \\ 
+  \hline 
+  \lsd{Market} & \lsd{xi} & & 1 \\ 
+  \hline 
+  \lsd{Market} & \lsd{EL\string_t} & 1 & 30 \\ 
+  \hline 
+  \lsd{Market} & \lsd{Q\string_t} & 1 & 3 \\ 
+  \hline 
+  \lsd{Market} & \lsd{shape} & & 1 \\ 
+  \hline 
+  \lsd{Market} & \lsd{pareto\string_mean} & & 0.5 \\ 
+  \hline 
+  \lsd{Market} & \lsd{Acesso\string_Credito} & & 1 \\ 
+  \hline 
+  \lsd{Government} & \lsd{Auton} & 1 & 3 \\ 
+  \hline 
+  \lsd{Government} & \lsd{c} & & 0.01 \\ 
+  \hline 
+  \lsd{Government} & \lsd{p\string_minsal} & & 0.2 \\ 
+  \hline 
+  \lsd{Government} & \lsd{i} & & 0 \\ 
+  \hline 
+  \lsd{Government} & \lsd{minsal\string_t} & 1 & 0.1 \\ 
+  \hline 
+  \lsd{Government} & \lsd{c\string_basic} & & 0.01 \\ 
+  \hline 
+  \lsd{Government} & \lsd{faixa\string_1} & & 1 \\ 
+  \hline 
+  \lsd{Government} & \lsd{tax\string_transf} & & -0.1 \\ 
+  \hline 
+  \lsd{Government} & \lsd{tax\string_flat} & & 0.2 \\ 
+  \hline 
+  \lsd{Government} & \lsd{faixa\string_2} & & 2 \\ 
+  \hline 
+  \lsd{Government} & \lsd{faixa\string_3} & & 5 \\ 
+  \hline 
+  \lsd{Government} & \lsd{flag\string_transf} & & 0 \\ 
+  \hline 
+  \lsd{Government} & \lsd{flag\string_progress} & & 1 \\ 
+  \hline 
+  \lsd{Government} & \lsd{tax\string_1} & & 0.1 \\ 
+  \hline 
+  \lsd{Government} & \lsd{tax\string_2} & & 0.2 \\ 
+  \hline 
+  \lsd{Government} & \lsd{tax\string_3} & & 0.4 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{delta} & & 0.02 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{B\string_t} & 1 & 0 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{I\string_t} & 1 & 2 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{K\string_t} & 1 & 3200 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{Q\string_fc} & 1 & 800 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{u\string_t} & 1 & 0.5 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{gamma\string_u} & & 0.1 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{h} & 1 & 0.1 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{mu} & & 0.1 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{ud} & & 0.8 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{flag\string_super} & & 1 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{gap\string_param} & & 0.025 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{profit\string_param} & & 0.008 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{valuation\string_param} & & 0.1 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{E\string_t} & & 0 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{Pe\string_t} & & 0 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{flag\string_dutt} & & 0 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{flag\string_marglin} & & 1 \\ 
+  \hline 
+  \lsd{Firms} & \lsd{param\string_auton} & & 0.001 \\ 
+  \hline 
+  \lsd{Banks} & \lsd{D\string_total} & 1 & 0 \\ 
+  \hline 
+  \lsd{Banks} & \lsd{Gov\string_Debt} & 1 & 0 \\ 
+  \hline 
+  \lsd{Banks} & \lsd{flag\string_deposits} & & 0 \\ 
+  \hline 
+  \lsd{Consumer} & \lsd{D\string_t} & 1 & 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ... \\ 
+  \hline 
+  \lsd{Consumer} & \lsd{Mw\string_t} & 1 & 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ... \\ 
+  \hline 
+  \lsd{Consumer} & \lsd{w\string_it} & 1 & 0.110213, 0.0837471, 0.138306, 0.102643, 0.177788, 0.0411241, 0.10741, 0.0855845, 0.0471434, 0.177595, 0.143023, 0.114721, 0.208009, 0.113841, 0.0605195, 0.0564179, 0.139049, 0.140412, 0.125707, 0.0853066, 0.106439, 0.0110429, 0.0353968, 0.064058, 0.160529, 0.0976425, 0.0773179, -0.018011, 0.0858333, 0.131678, 0.0319449, 0.0608118, 0.0460708, 0.120948, 0.0780019, 0.181671, 0.0872516, 0.0916892, -0.0637907, 0.22299, 0.0974787, 0.0680941, -0.0244235, 0.13811, 0.128179, 0.086699, 0.108543, 0.177596, 0.218292, 0.149595, 0.128311, 0.112778, 0.10014, 0.164973, 0.076452, 0.103614, 0.146275, 0.0526425, 0.149569, 0.101684, 0.0603074, 0.13431, 0.168662, 0.112393, 0.125518, 0.0271584, 0.0394423, 0.191628, -0.0222509, 0.0536421, 0.11863, 0.19807, 0.0816782, 0.0600387, 0.109547, 0.158831, 0.113967, 0.045366, 0.144463, 0.0820111, 0.099564, 0.118346, 0.0855852, 0.157438, 0.129744, 0.0924271, 0.0699594, 0.122687, 0.116288, 0.0807504, 0.0566286, 0.128518, 0.106398, 0.11926, 0.0664706, 0.0755724, 0.0672045, 0.0568255, 0.195727, 0.0455693, ... \\ 
+  \hline 
+  \lsd{Consumer} & \lsd{spsi} & & 0.816863, 0.787452, 0.804965, 0.774345, 0.85686, 0.79342, 0.775492, 0.79623, 0.766954, 0.745873, 0.799675, 0.835677, 0.75621, 0.815518, 0.814462, 0.799099, 0.753161, 0.804729, 0.803267, 0.822356, 0.774157, 0.805925, 0.772718, 0.873241, 0.814439, 0.709554, 0.802972, 0.799993, 0.750181, 0.853516, 0.863097, 0.721251, 0.792812, 0.807777, 0.812379, 0.796129, 0.803778, 0.8157, 0.772721, 0.81069, 0.870641, 0.781789, 0.816602, 0.765099, 0.715273, 0.866483, 0.850451, 0.81925, 0.85893, 0.779846, 0.751623, 0.697366, 0.855882, 0.765647, 0.771201, 0.763782, 0.87287, 0.814128, 0.798942, 0.953018, 0.811017, 0.793969, 0.746731, 0.868655, 0.773478, 0.723961, 0.782264, 0.838753, 0.870387, 0.792597, 0.764029, 0.8251, 0.868361, 0.831474, 0.924112, 0.783426, 0.8134, 0.752382, 0.852665, 0.717404, 0.84922, 0.78614, 0.788533, 0.848089, 0.796923, 0.767112, 0.778329, 0.890071, 0.943308, 0.831009, 0.74517, 0.844513, 0.768271, 0.818803, 0.82868, 0.852079, 0.847535, 0.862718, 0.818878, 0.716154, ... \\ 
+  \hline 
+  \lsd{Consumer} & \lsd{sigmapsi} & & 0.903899, 0.900111, 0.890416, 0.914059, 0.891913, 0.914332, 0.899592, 0.904005, 0.890648, 0.91283, 0.919963, 0.892488, 0.882083, 0.904867, 0.909466, 0.898814, 0.905544, 0.896249, 0.899112, 0.881655, 0.899958, 0.904178, 0.898697, 0.897241, 0.89995, 0.915396, 0.907105, 0.909301, 0.896927, 0.903667, 0.909022, 0.879115, 0.903003, 0.893277, 0.896843, 0.892004, 0.897889, 0.914448, 0.895824, 0.900636, 0.894579, 0.900374, 0.880859, 0.888001, 0.884104, 0.880822, 0.907332, 0.896094, 0.912021, 0.883541, 0.90386, 0.886532, 0.898801, 0.888682, 0.88891, 0.878757, 0.907667, 0.903321, 0.902586, 0.908121, 0.896938, 0.922027, 0.89589, 0.889351, 0.886651, 0.900518, 0.890862, 0.901074, 0.910429, 0.884625, 0.897571, 0.905327, 0.898086, 0.895582, 0.917271, 0.904826, 0.894036, 0.896772, 0.898635, 0.900636, 0.89359, 0.925681, 0.898082, 0.907658, 0.894609, 0.908662, 0.8963, 0.895118, 0.888227, 0.907936, 0.914339, 0.894549, 0.888341, 0.881474, 0.908087, 0.91378, 0.893503, 0.910983, 0.907403, 0.925259, ... \\ 
+  \hline 
+  \lsd{Consumer} & \lsd{eta} & & 0.516863, 0.487452, 0.504965, 0.474345, 0.55686, 0.49342, 0.475492, 0.49623, 0.466954, 0.445873, 0.499675, 0.535677, 0.45621, 0.515518, 0.514462, 0.499099, 0.453161, 0.504729, 0.503267, 0.522356, 0.474157, 0.505925, 0.472718, 0.573241, 0.514439, 0.409554, 0.502972, 0.499993, 0.450181, 0.553516, 0.563097, 0.421251, 0.492812, 0.507777, 0.512379, 0.496129, 0.503778, 0.5157, 0.472721, 0.51069, 0.570641, 0.481789, 0.516602, 0.465099, 0.415273, 0.566483, 0.550451, 0.51925, 0.55893, 0.479846, 0.451623, 0.397366, 0.555882, 0.465647, 0.471201, 0.463782, 0.57287, 0.514128, 0.498942, 0.653018, 0.511017, 0.493969, 0.446731, 0.568655, 0.473478, 0.423961, 0.482264, 0.538753, 0.570387, 0.492597, 0.464029, 0.5251, 0.568361, 0.531474, 0.624112, 0.483426, 0.5134, 0.452382, 0.552665, 0.417404, 0.54922, 0.48614, 0.488533, 0.548089, 0.496923, 0.467112, 0.478329, 0.590071, 0.643308, 0.531009, 0.44517, 0.544513, 0.468271, 0.518803, 0.52868, 0.552079, 0.547535, 0.562718, 0.518878, 0.416154, ... \\ 
+  \hline 
+  \lsd{Consumer} & \lsd{gmin} & & 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ... \\ 
+  \hline 
+  \lsd{Consumer} & \lsd{gmax} & & 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ... \\ 
+  \hline 
+\end{longtabu}
+
+\end{document}

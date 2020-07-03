@@ -100,6 +100,13 @@ EQUATION( "u_t" )
 
 RESULT( v[2] )
 
+EQUATION("r")
+/*
+Profit rate
+*/
+
+RESULT((V("pi")*VL("u_t",1))/V("gamma") )
+
 
 EQUATION( "I_t" )
 
@@ -114,29 +121,11 @@ if (v[20] == 1){
 	v[2] = v[0]*v[1];
 	v[15] = v[2]; // For compability reasons
 	} else {
-	v[0] = V("gap_param");				// Utilization gap coefficient
-	v[1] = V("gamma"); 				// 
-	v[2] = V("profit_param");					// Profit rate coefficient
-	v[3] = V("pi");					// Profit-share
-	v[4] = V("price_t");			// price in t. CHANGED: it is price_t insted price_t-1
-	v[5] = VL("Q_t", 1);				// Total output in t-1
-	v[6] = V("ud");
-	v[7] = VL("K_t", 1);
-	v[8] = (v[6]*v[7])/v[1];			// Qd
-	v[9] = V("valuation_param");					// Valuation ratio coefficient
-	v[10] = VL("Pe_t", 1);				// Stock price in t-1
-	v[11] = VL("E_t", 1);				// Equity amount
-	v[0] = V("c"); // Autonomous expenditure growth rate
-	v[12] = (v[0]*v[1] + v[2]*v[3])*v[4]*v[5];// 1st term of I_t
-	v[13] = -v[0]*v[1]*v[4]*v[8];			// 2nd term of I_t
-	v[14] = v[9]*v[10]*v[11];			// 3rd term of I_t
-	v[16] = VL("u_t",1);
-
+	
 	if(V("flag_dutt") == 0 && V("flag_marglin") == 1){ // Assegura que não são simultaneos
-
-		v[15] = v[0] + v[12] + v[14]; // Not reactiong to Un
+		v[15] = (V("param_auton") + V("profit_param")*V("pi") + V("gap_param")*VL("u_t",1))*VL("K_t", 1); // Bhaduri
 	} else if (V("flag_dutt") == 1 && V("flag_marglin") == 0){
-		v[15] = (v[0] + v[2]*v[3] + v[1]*v[16])*v[7];
+		v[15] = (V("param_auton") + V("profit_param")*V("r") + V("gap_param")*VL("u_t",1))*VL("K_t", 1); // Dutt
 	}
 }
 
@@ -265,7 +254,7 @@ EQUATION( "state_b_it" )
 	v[2] = V("Cw_t");				// Workers' consumption in t
 	v[3] = V("leque");
 //	if (v[0] + v[1] < v[2] || v[3] >= 1)	// Evaluates worker finance consumption with debt 
-		if(v[3] >=1)
+		if(v[3] >=V("Acesso_Credito"))
 		v[2] = 1;				// If it is true, the worker is borrowing
 	else
 		v[2] = 0;				// If not, the worker doesn't borrow
