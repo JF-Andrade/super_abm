@@ -26,7 +26,7 @@ RESULT( v[3] )
 EQUATION( "Auton" )
 
 	/*
-	Gasto Aut√¥nomo
+	Gasto AutÙnomo
 	*/
    
 	v[0] = VL("Auton", 1);
@@ -40,12 +40,12 @@ RESULT( v[2] )
 EQUATION( "basic" )
 
 	/*
-	"Renda b√°sica universal" - ALTERADO
+	"Renda b·sica universal" - ALTERADO
 	*/
 	
 	v[0] = V("minsal_t");	// minimum wage in t
-	v[1] = V("p_minsal");	// % sal min renda b√°sica
-	v[2] = V("c");	// basic income growth. CHANGED: Same than gov expend.
+	v[1] = V("p_minsal");	// % sal min renda b·sica
+	v[2] = V("c_basic");	// basic income growth
 
 	v[3] = (1 + v[2])*(v[0]*v[1]);
 
@@ -122,7 +122,7 @@ if (v[20] == 1){
 	v[15] = v[2]; // For compability reasons
 	} else {
 	
-	if(V("flag_dutt") == 0 && V("flag_marglin") == 1){ // Assegura que n√£o s√£o simultaneos
+	if(V("flag_dutt") == 0 && V("flag_marglin") == 1){ // Assegura que n„o s„o simultaneos
 		v[15] = (V("param_auton") + V("profit_param")*V("pi") + V("gap_param")*VL("u_t",1))*VL("K_t", 1); // Bhaduri
 	} else if (V("flag_dutt") == 1 && V("flag_marglin") == 0){
 		v[15] = (V("param_auton") + V("profit_param")*V("r") + V("gap_param")*VL("u_t",1))*VL("K_t", 1); // Dutt
@@ -249,12 +249,7 @@ EQUATION( "state_b_it" )
 	State of workers - borrow behavior. 1= borrowing; 0= not borrowing. Eqs. (21) and (22)
 	*/
 	
-	v[0] = VL("Mw_t", 1);			// Each Workers' amount of money in t-1
-	v[1] = V("Yw_t");				// Workers' disposable income in t
-	v[2] = V("Cw_t");				// Workers' consumption in t
-	v[3] = V("leque");
-//	if (v[0] + v[1] < v[2] || v[3] >= 1)	// Evaluates worker finance consumption with debt 
-		if(v[3] >=V("Acesso_Credito"))
+if(V("leque") >= V("Acesso_Credito"))
 		v[2] = 1;				// If it is true, the worker is borrowing
 	else
 		v[2] = 0;				// If not, the worker doesn't borrow
@@ -268,11 +263,11 @@ EQUATION( "Yw_t" )
 	/*
 	Workers' Total income. Eq. (23)
 	*/
-	v[20] = V("flag_deposits"); // 1 se dep√≥sitos remunerados, 0 caso contr√°rio
+	v[20] = V("flag_deposits"); // 1 se depÛsitos remunerados, 0 caso contr·rio
 	v[0] = V("w_it");				// Wage in t
 	v[1] = V("i");				// Interest rate
 	v[2] = VL("D_t", 1);			// Workers' debt in t-1
-	v[3] = V("basic");			// Renda b√°sica
+	v[3] = V("basic");			// Renda b·sica
 	v[4] = VL("Mw_t",1);
 	
 	v[5] = v[0] - v[1]*v[2] + v[3] + v[20]*(v[1]*v[4]);
@@ -285,11 +280,20 @@ EQUATION("Ydw_t")
 Workers' DISPOSABLE Income
 */
 
-v[0] = V("Tax");
-v[1] = V("Yw_t");
-v[2] = (1-v[0])*v[1];
+v[0] = V("Yw_t");
+v[1] = V("Tax_w");
+
+v[2] = v[0] - v[1];
 
 RESULT( v[2] )
+
+
+EQUATION("Ydw_total")
+	/*
+	Total disposable income
+	*/
+RESULT( SUM("Ydw_t") )
+
 
 EQUATION("Tax_w")
 /*
@@ -298,10 +302,10 @@ Workers' tax payment
 
 v[0] = V("Tax");
 v[1] = V("Yw_t");
-v[2] = v[0]*v[1];
+v[2] = VL("state_it", 1);
+v[3] = v[0]*v[1]*v[2];
 
-RESULT( v[2] )
-
+RESULT( v[3] ) // erro: estava v[2]
 
 
 EQUATION( "Sw" )
@@ -335,15 +339,12 @@ EQUATION( "Ww_t" )
 	*/
 
 	v[0] = VL("Ww_t", 1);			// Workers' wealth in t-1
-	v[1] = V("Ydw_t");				// Workers' disposable income in t
-	v[2] = V("Cw_t");				// Workers' consumption in t
+	v[1] = V("Sw");				// Workers' disposable income in t
+	v[2] = VL("D_t",1);
+	v[4] = V("D_t");
 
-	v[3] = v[0] + v[1] - v[2];
+	v[3] = v[0] + v[1] - (v[4] - v[2]);
 
-	if(v[3] < 0)				// Evaluates if workers' wealth is negative
-		v[3] = 0;				// If it is true, set wealth as 0
-	else
-		v[3] = v[3];
 
 RESULT( v[3] )
 
@@ -360,7 +361,7 @@ RESULT( SUM("Ww_t") )
 EQUATION( "Mw_t" )
 
 	/*
-	Workers‚Äô demand for money. Eqs. (27) and (28)
+	Workersí demand for money. Eqs. (27) and (28)
 	*/
 	
 	v[0] = VL("Mw_t", 1);			// Each Workers' amount of money in t-1
@@ -414,19 +415,24 @@ EQUATION( "Cw_t" )
 
 	v[0] = V("spsi");				// Propensity to save out of workers' income
 	v[1] = V("w_it");				// Wage in t
-	v[2] = V("eta");				// Sensitivity to workers‚Äô relative income
+	v[2] = V("eta");				// Sensitivity to workersí relative income
 	v[3] = V("wbarocc");			// Average wage of employed workers in t-1
 	v[4] = V("sigmapsi");			// Propensity to save out of workers' wealth
-	v[5] = VL("Ww_t", 1);			// Workers' wealth in t-1
+	v[5] = VL("Mw_t", 1);			// Workers' wealth in t-1
 	v[7] = V("Ydw_t");				// DISPOSABLE Income in t
 	
-	v[6] = (1 - v[0])*v[7]  + (1 - v[4])*v[5] + v[2]*(v[3] - v[1]); //SIMPLIFICADO
-
-//	if(v[6] < 0)				// Evaluates if workers' consumption is negative
-//		v[6] = 0;				// If it is true, set as 0
-//	else
-//		v[6] = v[6];
-
+	v[6] = (1 - v[0])*v[7]  + (v[5] >= 0)*(1 - v[4])*v[5] + v[2]*(v[3] - v[1]); 
+	
+	if(V("state_b_it") == 1){
+		v[6] = v[6];
+	} else {
+		if (v[6] > v[7]){
+			v[6] = v[7];
+		} else {
+			v[6] = v[6];
+		}
+	}
+	
 RESULT( v[6] )
 
 
@@ -587,22 +593,10 @@ EQUATION( "minsal_t" )
 RESULT( v[2] )
 
 
-EQUATION( "w_last" )
-
-	/*
-	Just for code consistency. Returns de last wage of wich worker.
-	*/
-	
-	v[0] = V("leque");
-	v[1] = VL("minsal_t", 1); // -1 to avoid instability
-	v[2] = v[0]*v[1];
-	
-RESULT( v[2] )
-
 
 EQUATION("leque")
 /*
-Leque salarial com distribui√ß√£o de pareto com shape=1 e mean=1 tal como no artigo original
+Leque salarial com distribuiÁ„o de pareto com shape=1 e mean=1 tal como no artigo original
 */
 v[0] = V("shape");
 v[1] = V("pareto_mean");
@@ -624,20 +618,6 @@ v[2] = (v[1]-v[0])/v[0];
 RESULT( v[2] )
 
 
-EQUATION( "g_it" )
-
-	/*
-	Uniformly distributed shocks with mean zero in the wages.
-	Suggestion: set to consider the shock's amplitude.
-	*/
-	
-	v[0] = V("gmin");
-	v[1] = V("gmax"); 
-	v[2] =  uniform(v[0], v[1]);
-
-RESULT( v[2] )
-
-
 EQUATION_DUMMY( "state_it" , "EL_t")
 
 	/*
@@ -650,22 +630,17 @@ EQUATION( "w_it" )
 	/*
 	Updates wages by worker, evaluates wich one is below the minimum and set them to it.
 	*/
-	
-	v[0] = V("w_last");			// wage in t-1
+	v[0] = V("leque")*VL("minsal_t", 1);
 	v[1] = VL("inflation",1);			// Inflation rate. To Fix Deadlock error
-	v[2] = V("g_it");
-	v[3] = V("minsal_t");			// minimun salary in t
+
 	if (v[1] >= 0){
-		v[4] = v[0]*(1 + v[1]);//*(1 + v[2]); 	// current wage. Salary in t-1 updated by inflation and the shock (g_it)
+		v[4] = v[0]*(1 + v[1]);
 	} else {
 		v[4] = v[0];
 		}
 	
-	
-//	if (v[4] < v[3]) 				// Evaluates if current wages is below the minimum one.
-//		v[4] = v[3]; 			// If it is true, then set the wage as minimum.
-
 	v[5] = VL("state_it",1);
+
 	v[4] = v[4]*v[5]; 			// If unemployed, w_it = 0
 
 RESULT( v[4] )
@@ -712,6 +687,32 @@ EQUATION( "M_t" )
 	v[3] = v[0];
 
 RESULT(v[3])
+
+EQUATION("Borrow")
+/*
+Quantos tomam emprÈstimo efetivamente
+*/
+
+v[0] = V("D_t");
+v[1] = VL("D_t",1);
+
+if (v[0] > v[1]){
+	v[2] = 1;
+} else {
+	v[2] = 0;}
+
+RESULT(v[2])
+
+
+EQUATION("Share_Borrow")
+/*
+Comment
+*/
+v[0] = SUM("Borrow");
+v[1] = V("N");
+v[2] = (v[0]/v[1]);
+
+RESULT( v[2] )
 
 
 EQUATION( "numOfBorrowWorkers_t" )
@@ -782,7 +783,6 @@ RESULT( v[2] )
 EQUATION("Gov_Total")
 /*
 Government total expenditure (fully autonomous)
-
 Warning: DO NOT include Gov_Total in GDP calculation. 
 Reason: basic income already included in consumers disposable income
 */
@@ -793,12 +793,14 @@ v[2] = v[0] + v[1];
 
 RESULT( v[2] )
 
+
 EQUATION("Tax_Total")
 /*
 Government total revenue collect at consumers disposable income
 */
 
 RESULT( SUM("Tax_w") )
+
 
 EQUATION("Gov_Balance")
 /*
@@ -824,6 +826,7 @@ v[3] = (1+v[0])*v[2] - v[1];
 
 
 RESULT( v[3] )
+
 
 EQUATION("Gini_bTax")
 /*
@@ -875,6 +878,7 @@ v[7] = v[4]/v[2];
 
 RESULT(v[7])
 
+
 EQUATION("Gini_wages")
 /*
 Gini calculation of wages
@@ -897,15 +901,14 @@ CYCLE(cur, "Consumer")
 	
 v[7] = v[4]/v[2];
 
-
 RESULT(v[7])
 
 
 EQUATION("Tax")
 /*
-Se flag_progress = 1, imposto progressivo. Caso contr√°rio, flat
-Se flag_transf = 1, transfer√™ncia de renda
-Faixas est√£o em termos de SM
+Se flag_progress = 1, imposto progressivo. Caso contr·rio, flat
+Se flag_transf = 1, transferÍncia de renda
+Faixas est„o em termos de SM
 */
 
 v[0] = V("flag_progress");
@@ -922,10 +925,7 @@ v[10] = V("tax_transf");
 if (v[0] == 0){
 	v[20] = v[6];
 	} else {
-	
-	CYCLE(cur, "Consumer"){
-	
-		v[5] = VS(cur, "w_it");
+		v[5] = V("leque");
 		if(v[5] < V("faixa_1") && V("flag_transf") == 1){
 				v[20] = V("tax_transf"); // Deve ser negativo
 		} else if (v[5] < V("faixa_1") && V("flag_transf") == 0) {
@@ -936,7 +936,7 @@ if (v[0] == 0){
 				v[20] = V("tax_2");
 		} else {
 			v[20] = V("tax_3");
-		}
+		
 	}
 }
 PARAMETER // Checar
@@ -952,4 +952,3 @@ void close_sim( void )
 {
 	// close simulation special commands go here
 }
-
