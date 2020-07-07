@@ -8,12 +8,17 @@ Abaixo uma tabela detalhando cada um desses experimentos e associando ao respect
 
 * Configurações globais
 
+
+
+
 #+BEGIN_SRC python
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
 discart = 0.1 # Serão desconsiderados os 10% primeiros períodos da simulação
+teste = pd.read_csv('./Data/Teste.txt', sep = ',')
+return teste.head()
 #+END_SRC
 
 #+RESULTS:
@@ -30,3 +35,9 @@ teste.head()
 #+RESULTS:
 
 * Comportamental
+
+#+BEGIN_SRC R
+head(mtcars)
+#+END_SRC
+
+#+RESULTS:

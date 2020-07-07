@@ -1,0 +1,72 @@
+% Created 2020-07-05 dom 20:29
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Gabriel Petrini da Silveira}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={Gabriel Petrini da Silveira},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.3.7)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{Introdução}
+\label{sec:orge111781}
+
+Este arquivo contém os códigos e a análise dos resultados da simulação dos experimentos. 
+Por padrão, os efeitos serão comparados em relação ao baseline.
+Os experimentos são de duas naturezas: (i) política econômica e (ii) comportamental.
+Os primeiros tratam das mudanças nos parâmetros associados ao governo enquanto os segundos dizem respeito à dispersão dos parâmetros da função de consumo dos consumidores.
+Abaixo uma tabela detalhando cada um desses experimentos e associando ao respectivo arquivo de configuração do LSD.
+
+\section{Configurações globais}
+\label{sec:orgbd55e52}
+
+
+
+
+\begin{verbatim}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+discart = 0.1 # Serão desconsiderados os 10% primeiros períodos da simulação
+teste = pd.read_csv('./Data/Teste.txt', sep = ',')
+return teste.head()
+\end{verbatim}
+
+
+
+\section{Política econômica}
+\label{sec:org79d8b42}
+
+\begin{verbatim}
+teste = pd.DataFrame('Teste.txt', sep = ',')
+teste.head()
+\end{verbatim}
+
+\section{Comportamental}
+\label{sec:org39f9ceb}
+
+\begin{verbatim}
+head(mtcars)
+\end{verbatim}
+\end{document}
