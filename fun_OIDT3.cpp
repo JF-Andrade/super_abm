@@ -304,6 +304,11 @@ v[0] = V("Tax");
 v[1] = V("Yw_t");
 v[2] = VL("state_it", 1);
 v[3] = v[0]*v[1]*v[2];
+<<<<<<< HEAD
+=======
+
+RESULT( v[2] )
+>>>>>>> 72240c3313ee29e94457efe39d25084bc7d69a87
 
 RESULT( v[3] ) // erro: estava v[2]
 
@@ -421,7 +426,11 @@ EQUATION( "Cw_t" )
 	v[5] = VL("Mw_t", 1);			// Workers' wealth in t-1
 	v[7] = V("Ydw_t");				// DISPOSABLE Income in t
 	
+<<<<<<< HEAD
 	v[6] = (1 - v[0])*v[7]  + (v[5] >= 0)*(1 - v[4])*v[5] + v[2]*(v[3] - v[1]); 
+=======
+	v[6] = (1 - v[0])*v[7]  + (v[5]>=0)*(1 - v[4])*v[5] + v[2]*(v[3] - v[1]); 
+>>>>>>> 72240c3313ee29e94457efe39d25084bc7d69a87
 	
 	if(V("state_b_it") == 1){
 		v[6] = v[6];
@@ -632,7 +641,10 @@ EQUATION( "w_it" )
 	*/
 	v[0] = V("leque")*VL("minsal_t", 1);
 	v[1] = VL("inflation",1);			// Inflation rate. To Fix Deadlock error
+<<<<<<< HEAD
 
+=======
+>>>>>>> 72240c3313ee29e94457efe39d25084bc7d69a87
 	if (v[1] >= 0){
 		v[4] = v[0]*(1 + v[1]);
 	} else {
@@ -690,20 +702,31 @@ RESULT(v[3])
 
 EQUATION("Borrow")
 /*
+<<<<<<< HEAD
 Quantos tomam empréstimo efetivamente
+=======
+Quantos tomam emprÃ©stimo efetivamente
+>>>>>>> 72240c3313ee29e94457efe39d25084bc7d69a87
 */
 
 v[0] = V("D_t");
 v[1] = VL("D_t",1);
 
 if (v[0] > v[1]){
+<<<<<<< HEAD
 	v[2] = 1;
 } else {
+=======
+	v[2] = 1;} else {
+>>>>>>> 72240c3313ee29e94457efe39d25084bc7d69a87
 	v[2] = 0;}
 
 RESULT(v[2])
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 72240c3313ee29e94457efe39d25084bc7d69a87
 EQUATION("Share_Borrow")
 /*
 Comment
@@ -925,6 +948,7 @@ v[10] = V("tax_transf");
 if (v[0] == 0){
 	v[20] = v[6];
 	} else {
+<<<<<<< HEAD
 		v[5] = V("leque");
 		if(v[5] < V("faixa_1") && V("flag_transf") == 1){
 				v[20] = V("tax_transf"); // Deve ser negativo
@@ -937,8 +961,23 @@ if (v[0] == 0){
 		} else {
 			v[20] = V("tax_3");
 		
+=======
+	
+v[5] = V("leque");
+if(v[5] < V("faixa_1") && V("flag_transf") == 1){
+		v[20] = V("tax_transf"); // Deve ser negativo
+	} else if (v[5] < V("faixa_1") && V("flag_transf") == 0) {
+		v[20] = 0;
+	} else if (v[5] >= V("faixa_1") && v[5] < V("faixa_2")){
+		v[20] = V("tax_1");
+	} else if (v[5] >= V("faixa_2") && v[5] < V("faixa_3")){
+		v[20] = V("tax_2");
+					} else {
+		v[20] = V("tax_3");
+>>>>>>> 72240c3313ee29e94457efe39d25084bc7d69a87
 	}
 }
+
 PARAMETER // Checar
 RESULT(v[20])
 
