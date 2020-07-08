@@ -6,27 +6,27 @@ SWITCH_CC=-O3 -ggdb3
 SWITCH_CC_LNK=
 
 # System compilation options
-LSDROOT=/home/gpetrini/Lsd
+LSDROOT=C:/LSD
 SRC=src
-EXT=
+EXT=.exe
 
 # Libraries options
-TCL_VERSION=8.6
-PATH_TCL_HEADER=/usr/include/tcl$(TCL_VERSION) #path to the file tcl.h
-PATH_TK_HEADER=/usr/include/tcl$(TCL_VERSION) #path to the tk.h
-PATH_HEADER=.
-PATH_TCL_LIB=.
-PATH_TK_LIB=.
-PATH_LIB=.
+TCL_VERSION=86
+PATH_TCL_HEADER=$(LSDROOT)/gnu64/include
+PATH_TK_HEADER=$(LSDROOT)/gnu64/include
+PATH_HEADER=$(LSDROOT)/gnu64/include
+PATH_TCL_LIB=$(LSDROOT)/gnu64/lib
+PATH_TK_LIB=$(LSDROOT)/gnu64/lib
+PATH_LIB=$(LSDROOT)/gnu64/lib
 TCL_LIB=-ltcl$(TCL_VERSION)
 TK_LIB=-ltk$(TCL_VERSION)
-LIBS=-lz -lpthread
+LIBS=-lz
 
 # Compiler options
-CC=g++
-GLOBAL_CC=-march=native -std=gnu++14 -w
-SSWITCH_CC=-fnon-call-exceptions -O3
-LSDROOT=/HDD/Lsd
+CC=x86_64-w64-mingw32-g++
+GLOBAL_CC= -march=native -std=gnu++14 -w
+SSWITCH_CC=-mthreads -mwindows -O3
+LSDROOT=C:/LSD
 
 # Body of makefile (from src/makefile_base.txt)
 # specify where are the sources of LSD
