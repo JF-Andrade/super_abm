@@ -11,28 +11,55 @@ Abaixo uma tabela detalhando cada um desses experimentos e associando ao respect
 
 
 
-#+BEGIN_SRC python
+#+BEGIN_SRC python :session
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
 discart = 0.1 # Serão desconsiderados os 10% primeiros períodos da simulação
 teste = pd.read_csv('./Data/Teste.txt', sep = ',')
-return teste.head()
+print(teste)
 #+END_SRC
 
 #+RESULTS:
+#+begin_example
+Python 3.7.6 (default, Jan  8 2020, 19:59:22) 
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+Cw_total_1  EL_t_1        Q_t_1  ...   Mw_total_1_1  Gov_Debt_1_1  Ww_total_1_1
+0            NaN      30     3.000000  ...            NaN      0.000000           NaN
+1      20.223940      31    23.553940  ...      80.776060      3.050200     80.776060
+2    1024.899397    1030  1030.244429  ...    -830.709666      6.130700     12.514069
+3     919.799431     995  1015.016975  ...   -1231.852881      9.241803    404.490229
+4     906.016054     997  1000.241964  ...   -1658.393784     12.383815    685.518715
+..           ...     ...          ...  ...            ...           ...           ...
+496  1405.740510    2039  1974.627855  ... -314278.497000  41861.527180   7414.791918
+497  1363.449046    1944  1932.220007  ... -314863.275000  42283.092460   7242.959440
+498  1583.855771    2173  2153.189311  ... -315427.029700  42708.873190   7361.462056
+499  1426.015848    2037  2015.183608  ... -315930.999000  43138.911530   7351.118894
+500  1414.115008    1991  1997.843813  ... -316495.590300  43573.250050   7269.342394
+
+[501 rows x 29 columns]
+#+end_example
 
 
 
 * Política econômica
 
-#+BEGIN_SRC python :dir Data :results output
-teste = pd.DataFrame('Teste.txt', sep = ',')
+#+BEGIN_SRC python :dir Data :results output :session
 teste.head()
 #+END_SRC
 
 #+RESULTS:
+: Cw_total_1  EL_t_1        Q_t_1  ...  Mw_total_1_1  Gov_Debt_1_1  Ww_total_1_1
+: 0          NaN      30     3.000000  ...           NaN      0.000000           NaN
+: 1    20.223940      31    23.553940  ...     80.776060      3.050200     80.776060
+: 2  1024.899397    1030  1030.244429  ...   -830.709666      6.130700     12.514069
+: 3   919.799431     995  1015.016975  ...  -1231.852881      9.241803    404.490229
+: 4   906.016054     997  1000.241964  ...  -1658.393784     12.383815    685.518715
+: 
+: [5 rows x 29 columns]
+
 
 * Comportamental
 
