@@ -241,7 +241,7 @@ Var: Borrow 0 s + n n
 
 SIM_NUM 1
 SEED 1
-MAX_STEP 680
+MAX_STEP 1000
 EQUATION fun_OIDT3.cpp
 MODELREPORT report_Sim2.html
 

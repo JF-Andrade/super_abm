@@ -177,7 +177,7 @@ Object: Government C	1
 Var: Auton 1 s + n n	3
 Param: c 0 n + n n	0.01
 Param: p_minsal 0 n + n n	0.2
-Param: i 0 n + n n	0.001
+Param: i 0 n + n n	0
 Var: minsal_t 1 n + n n	0.1
 Var: basic_total 0 s + n n
 Var: Gov_Balance 0 s + n n
@@ -218,7 +218,7 @@ Var: M_t 0 n + n n
 Var: Mw_total 0 s + n n
 Var: Gov_Debt 1 s + n n	0
 Var: Ww_total 0 s + n n
-Param: flag_deposits 0 n + n n	1
+Param: flag_deposits 0 n + n n	0
 
 Object: Consumer C	5000
 Var: Cw_t 0 s + n n

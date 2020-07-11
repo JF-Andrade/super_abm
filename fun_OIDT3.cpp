@@ -665,9 +665,9 @@ EQUATION( "Yf_t" )
 	Financial sector income. Eq. (33). Updated: MUST BE 0
 	*/
 
-	v[0] = V("i");								// Interest rate
+	v[0] = V("i");				// Interest rate
 	v[1] = VL("D_total", 1);			// Workers' debt in t-1
-	v[2] = VL("B_t", 1);					// Bonds in t-1
+	v[2] = VL("B_t", 1);			// Bonds in t-1
 	v[3] = VL("Gov_Debt",1);
 	v[4] = VL("M_TOTAL",1);
 
@@ -699,7 +699,7 @@ Quantos efetivamente tomam empréstimo
 	if(v[0] > v[1])
 		v[2] = 1;
 	else{
-		v[2] = 0;
+	v[2] = 0;
 	}
 
 RESULT(v[2])
