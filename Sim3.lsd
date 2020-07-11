@@ -163,9 +163,9 @@ Var: Ydw_total 0 s + n n
 Param: faixa_1 0 n + n n	1
 Param: faixa_2 0 n + n n	2
 Param: faixa_3 0 n + n n	5
-Param: flag_progress 0 n + n n	1
-Param: flag_transf 0 n + n n	1
-Param: tax_flat 0 n + n n	0.4
+Param: flag_progress 0 n + n n	0
+Param: flag_transf 0 n + n n	0
+Param: tax_flat 0 n + n n	0.3
 Param: tax_transf 0 n + n n	-0.1
 Param: tax_1 0 n + n n	0.1
 Param: tax_2 0 n + n n	0.2
@@ -181,7 +181,7 @@ Var: basic_total 0 n + n n
 Var: Gov_Balance 0 s + n n
 Var: Gov_Total 0 s + n n
 Var: Tax_Total 0 s + n n
-Param: c_basic 0 n + n n	0
+Param: c_basic 0 n + n n	0.01
 Var: basic 0 n + n n
 
 Object: Firms C	1
@@ -189,7 +189,7 @@ Param: delta 0 n + n n	0.02
 Var: A_t 0 n + n n
 Var: B_t 1 n + n n	0
 Var: I_t 1 s + n n	2
-Var: K_t 1 s + n n	4000
+Var: K_t 1 s + n n	3200
 Var: Q_fc 1 s + n n	50
 Var: u_t 1 s + n n	0.5
 Param: gamma_u 0 n + n n	0.1
@@ -203,7 +203,7 @@ Param: valuation_param 0 n + n n	0.1
 Param: E_t 0 n + n n	0
 Param: Pe_t 0 n + n n	0
 Param: flag_dutt 0 n + n n	0
-Param: flag_marglin 0 n + n n	1
+Param: flag_marglin 0 n + n n	0
 Var: r 0 s + n n
 Param: param_auton 0 n + n n	0.001
 
