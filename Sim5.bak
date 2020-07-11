@@ -191,8 +191,8 @@ Param: delta 0 n + n n	0.02
 Var: A_t 0 s + n n
 Var: B_t 1 s + n n	0
 Var: I_t 1 s + n n	2
-Var: K_t 1 s + n n	12000
-Var: Q_fc 1 s + n n	12000
+Var: K_t 1 s + n n	20000
+Var: Q_fc 1 s + n n	15000
 Var: u_t 1 s + n n	0.5
 Param: gamma_u 0 n + n n	0.1
 Var: h 1 s + n n	0.1
