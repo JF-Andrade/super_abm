@@ -666,7 +666,7 @@ EQUATION( "Yf_t" )
 	*/
 
 	v[0] = V("i");				// Interest rate
-	v[1] = VL("D_t", 1);			// Workers' debt in t-1
+	v[1] = VL("D_total", 1);			// Workers' debt in t-1
 	v[2] = VL("B_t", 1);			// Bonds in t-1
 	v[3] = VL("Gov_Debt",1);
 	v[4] = VL("M_TOTAL",1);
