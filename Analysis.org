@@ -8,6 +8,18 @@ Abaixo uma tabela detalhando cada um desses experimentos e associando ao respect
 
 * Configurações globais
 
+| Nome do arquivo | Experimento                                           | Variável                         | Resultados esperados (em relação ao baseline)                                                                                                                        |
+|-----------------+-------------------------------------------------------+----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                 | Distribuição menos desigual                           | Shape: 1 -> 2                    | Reduz Gini; Redução do consumo e dívida;                                                                                                                             |
+|                 | Diminuir propensão a poupar a partir da riqueza       | $\Downarrow \sigma_\psi$ (média) | Reduz Gini; Aumento do consumo e do endividamento; Maior volátil; Maior tomada de crédito efetiva                                                                    |
+|                 | Diminuir propensão a poupar a partir da renda         | $\Downarrow s_\psi$ (média)      | Reduz Gini; Aumento do consumo e do endividamento; Maior volátil; Maior tomada de crédito efetiva                                                                    |
+|                 | Alterar consumo a partir do salário relativo          | $\Uparrow \eta$  (desvio padrão) | Aumento do consumo, mas não necessariamente do endividamento; Consumo mais associado ao emprego (salário médio); Gini reduz (menos claro que os outros experimentos) |
+|                 | Aumentar o critério de acesso ao crédito              | $\Uparrow$ Acesso ao crédito     | Menor endividamento; Menor consumo; Futuro: Demanda Reprimida; Aumento Gini                                                                                          |
+|                 | Diminuir o critério de acesso ao crédito              | $\Downarrow$ Acesso ao crédito   | (Inverso do anterior)                                                                                                                                                |
+|                 | Aumento da proporção do salário mínimo (renda básica) | p_basic                          | (Similar a diminuição a propensão a poupar a partir da riqueza)                                                                                                      |
+|                 | Sem renda básica                                      | p_basic = 0                      | Aumento do Gini; Aumento pouco significativo do endividamento (em nível) + recomposição (produto menor), maior relação dívida/renda                                  |
+|                 | Aumento do salário mínimo                             | w_min                            | Gini diminui se aumentar emprego (se aproxime mais rápido da distribuição de pareto); Endividamento igual                                                            |
+|                 | Inclusão do imposto progressivo sem tranferência      | flag_pro = 1                     | Reduz Gini;                                                                                                                                                          |
 
 
 
